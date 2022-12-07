@@ -16,12 +16,6 @@ import javax.persistence.*
 data class Producto(
     @Id
     val id: Long,
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator",
-    )
-    @Column(name = "uuid")
-    @Type(type = "uuid-char")
     val uuid: UUID = UUID.randomUUID(),
     val tipo: Tipo,
     val marca: String,
