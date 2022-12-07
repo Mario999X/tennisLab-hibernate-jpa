@@ -4,7 +4,9 @@ import models.Adquisicion
 import models.Encordar
 import models.Personalizar
 import models.Producto
+import models.usuario.Cliente
 import models.usuario.Encargado
+import models.usuario.Trabajador
 
 fun getEncargadoInit() = listOf(
     Encargado(
@@ -25,6 +27,53 @@ fun getEncargadoInit() = listOf(
         id = 3L,
         nombre = "Elizabeth",
         apellido = "Merino",
+        email = "email3@email.com",
+        password = "4321"
+    )
+)
+fun getClientesInit() = listOf(
+    Cliente(
+        id = 1L,
+        nombre = "Sebastian",
+        apellido = "Mendoza",
+        email = "email@email.com",
+        password = "1234"
+    ),
+    Cliente(
+        id = 2L,
+        nombre = "Mario",
+        apellido = "Resa",
+        email = "email2@email.com",
+        password = "5678"
+    ),
+    Cliente(
+        id = 3L,
+        nombre = "Sandra",
+        apellido = "Ortega",
+        email = "email3@email.com",
+        password = "4321"
+    )
+)
+
+fun getTrabajadorInit() = listOf(
+    Trabajador(
+        id = 1L,
+        nombre = "Adrian",
+        apellido = "Garcia",
+        email = "email@email.com",
+        password = "1234"
+    ),
+    Trabajador(
+        id = 2L,
+        nombre = "Julian",
+        apellido = "Estrada",
+        email = "email2@email.com",
+        password = "5678"
+    ),
+    Trabajador(
+        id = 3L,
+        nombre = "Camila",
+        apellido = "Echeverri",
         email = "email3@email.com",
         password = "4321"
     )

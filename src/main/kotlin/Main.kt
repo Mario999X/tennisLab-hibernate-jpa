@@ -1,10 +1,12 @@
 import controllers.*
 import database.*
 import repository.adquisicion.AdquisicionRepositoryImpl
+import repository.cliente.ClienteRepositoryImpl
 import repository.encargado.EncargadoRepositoryImpl
 import repository.encordar.EncordarRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
+import repository.trabajador.TrabajadorRepositoryImpl
 
 fun main() {
 
@@ -16,6 +18,8 @@ fun main() {
     val encordarController = EncordarController(EncordarRepositoryImpl())
     val personalizarController = PersonalizarController(PersonalizarRepositoryImpl())
     val encargadoController = EncargadoController(EncargadoRepositoryImpl())
+    val clienteController = ClienteController(ClienteRepositoryImpl())
+    val trabajadorController = TrabajadorController(TrabajadorRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -37,6 +41,14 @@ fun main() {
     val encargadosInit = getEncargadoInit()
     encargadosInit.forEach { encargado ->
         encargadoController.createEncargado(encargado)
+    }
+    val clientesInit = getClientesInit()
+    clientesInit.forEach { cliente ->
+        clienteController.createCliente(cliente)
+    }
+    val trabajadoresInit = getTrabajadorInit()
+    trabajadoresInit.forEach { trabajadores ->
+        trabajadorController.createTrabajador(trabajadores)
     }
 
     //CRUD
@@ -117,6 +129,55 @@ fun main() {
     //FindAll
     val encargado = encargadoController.getEncargados()
     encargado.forEach { println(it) }
+    //FindById
+    val encargadoId = encargadoController.getEncargadoById(encargado[0].id)
+    encargadoId?.let { println(it) }
+    //Update
+    val encargadoUpdate = encargadoController.getEncargadoById(encargado[0].id)
+    encargadoUpdate?.let {
+        it.nombre = "Ernesto"
+        encargadoController.updateEncargado(it)
+    }
+    println(encargadoUpdate)
+    //Delete
+    val encargadoDelete = encargadoController.getEncargadoById(encargado[0].id)
+    encargadoDelete?.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
+
+    //Cliente
+    //FindAll
+    val cliente = clienteController.getClientes()
+    cliente.forEach { println(it) }
+    //FindById
+    val clienteId = clienteController.getClienteById(cliente[0].id)
+    clienteId?.let { println(it) }
+    //Update
+    val clienteUpdate = clienteController.getClienteById(cliente[0].id)
+    clienteUpdate?.let {
+        it.apellido = "Acosta"
+        clienteController.updateCliente(it)
+    }
+    println(clienteUpdate)
+    //Delete
+    val clienteDelete = clienteController.getClienteById(cliente[0].id)
+    clienteDelete?.let { if (clienteController.deleteCliente(it)) println("Cliente eliminado") }
+
+    //Trabajador
+    //FindAll
+    val trabajador = trabajadorController.getTrabajadores()
+    trabajador.forEach { println(it) }
+    //FindById
+    val trabajadorId = trabajadorController.getTrabajadorById(trabajador[0].id)
+    trabajadorId?.let { println(it) }
+    //Update
+    val trabajadorUpdate = trabajadorController.getTrabajadorById(trabajador[0].id)
+    trabajadorUpdate?.let {
+        it.email = "emailCambiado@otroemail.com"
+        trabajadorController.updateTrabajador(it)
+    }
+    println(trabajadorUpdate)
+    //Delete
+    val trabajadorDelete = trabajadorController.getTrabajadorById(trabajador[0].id)
+    trabajadorDelete?.let { if (trabajadorController.deleteTrabajador(it)) println("Trabajador eliminado") }
 
 }
 

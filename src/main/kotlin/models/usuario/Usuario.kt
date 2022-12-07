@@ -13,8 +13,8 @@ class Usuario(
     val id: Long,
     val uuid: UUID = UUID.randomUUID(),
     var nombre: String,
-    val apellido: String,
-    val email: String,
+    var apellido: String,
+    var email: String,
     val password: String
 ) {
     enum class Perfil(val rol: String) {
