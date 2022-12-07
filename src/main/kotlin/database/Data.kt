@@ -1,6 +1,8 @@
 package database
 
 import models.Adquisicion
+import models.Encordar
+import models.Personalizar
 import models.Producto
 
 fun getProductosInit() = listOf(
@@ -46,4 +48,51 @@ fun getAdquisicionInit() = listOf(
         cantidad = 2,
         producto = getProductosInit()[2]
     )
+)
+
+fun getEncordadosInit() = listOf(
+    Encordar(
+        id = 1L,
+        tensionCuerdasHorizontales = 2.2,
+        cordajeHorizontal = "Dato 1",
+        tensionCuerdasVerticales = 1.2,
+        cordajeVertical = "Dato 2",
+        nudos = 2
+    ),
+    Encordar(
+        id = 2L,
+        tensionCuerdasHorizontales = 1.0,
+        cordajeHorizontal = "Dato 1",
+        tensionCuerdasVerticales = 2.2,
+        cordajeVertical = "Dato 2",
+        nudos = 4
+    ), Encordar(
+        id = 3L,
+        tensionCuerdasHorizontales = 1.2,
+        cordajeHorizontal = "Dato 1",
+        tensionCuerdasVerticales = 3.2,
+        cordajeVertical = "Dato 2",
+        nudos = 2
+    )
+)
+
+fun getPersonalizacionInit() = listOf(
+    Personalizar(
+        id = 1L,
+        peso = 1.3,
+        balance = 1.4,
+        rigidez = 1
+    ),
+    Personalizar(
+        id = 2L,
+        peso = 1.5,
+        balance = 1.7,
+        rigidez = 1
+    ),
+    Personalizar(
+        id = 3L,
+        peso = 1.8,
+        balance = 1.1,
+        rigidez = 4
+    ),
 )

@@ -1,8 +1,6 @@
 package models
 
 import com.google.gson.GsonBuilder
-import org.hibernate.annotations.GenericGenerator
-import org.hibernate.annotations.Type
 import java.util.*
 import javax.persistence.*
 

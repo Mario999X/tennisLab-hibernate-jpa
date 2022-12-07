@@ -1,9 +1,11 @@
 import controllers.AdquisicionController
+import controllers.EncordarController
+import controllers.PersonalizarController
 import controllers.ProductoController
-import database.HibernateManager
-import database.getAdquisicionInit
-import database.getProductosInit
+import database.*
 import repository.adquisicion.AdquisicionRepositoryImpl
+import repository.encordar.EncordarRepositoryImpl
+import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
 
 fun main() {
@@ -13,6 +15,8 @@ fun main() {
     //Controladores
     val productoController = ProductoController(ProductoRepositoryImpl())
     val adquisicionController = AdquisicionController(AdquisicionRepositoryImpl())
+    val encordarController = EncordarController(EncordarRepositoryImpl())
+    val personalizarController = PersonalizarController(PersonalizarRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -22,6 +26,14 @@ fun main() {
     val adquisicionesInit = getAdquisicionInit()
     adquisicionesInit.forEach { adquisicion ->
         adquisicionController.createAdqusicion(adquisicion)
+    }
+    val encordadosInit = getEncordadosInit()
+    encordadosInit.forEach { encordar ->
+        encordarController.createEncordado(encordar)
+    }
+    val personalizacionesInit = getPersonalizacionInit()
+    personalizacionesInit.forEach { personalizacion ->
+        personalizarController.createPersonalizacion(personalizacion)
     }
 
     //CRUD
@@ -62,6 +74,41 @@ fun main() {
     val adquisicionDelete = adquisicionController.getAdquisicionById(adquisicion[0].id)
     adquisicionDelete?.let { if (adquisicionController.deleteAdquisicion(it)) println("Adquisicion eliminada") }
 
+    //Encordar
+    //FindAll
+    val encordar = encordarController.getEncordados()
+    encordar.forEach { println(it) }
+    //FindById
+    val encordadoId = encordarController.getEncordadoById(encordar[0].id)
+    encordadoId?.let { println(it) }
+    //Update
+    val encordadoUpdate = encordarController.getEncordadoById(encordar[0].id)
+    encordadoUpdate?.let {
+        it.nudos += 2
+        encordarController.updateEncordado(it)
+    }
+    println(encordadoUpdate)
+    //Delete
+    val encordadoDelete = encordarController.getEncordadoById(encordar[0].id)
+    encordadoDelete?.let { if (encordarController.deleteEncordado(it)) println("Encordado eliminado") }
+
+    //Personalizar
+    //FindAll
+    val personalizar = personalizarController.getPersonalizaciones()
+    personalizar.forEach { println(it) }
+    //FindById
+    val personalizarId = personalizarController.getPersonalizacionById(personalizar[0].id)
+    personalizarId?.let { println(it) }
+    //Update
+    val personalizarUpdate = personalizarController.getPersonalizacionById(personalizar[0].id)
+    personalizarUpdate?.let {
+        it.peso += 1
+        personalizarController.updatePersonalizacion(personalizarUpdate)
+    }
+    println(personalizarUpdate)
+    //Delete
+    val personalizarDelete = personalizarController.getPersonalizacionById(personalizar[0].id)
+    personalizarDelete?.let { if (personalizarController.deletePersonalizacion(it)) println("Personalización eliminada") }
 }
 
 fun initDataBase() {

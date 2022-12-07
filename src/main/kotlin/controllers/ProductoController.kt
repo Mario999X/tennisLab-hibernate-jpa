@@ -14,7 +14,7 @@ class ProductoController(private val productoRepository: ProductoRepository) {
     }
 
     fun getProductos(): List<Producto> {
-        log.info { "Obteniendo productos" }
+        log.debug { "Obteniendo productos" }
         return productoRepository.findAll()
     }
 
