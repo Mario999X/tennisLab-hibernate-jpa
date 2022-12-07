@@ -11,7 +11,6 @@ class Cliente(
     email: String,
     password: String,
     val perfil: Perfil = Perfil.TENISTA
-
 ) : Usuario(id, uuid, nombre, apellido, email, password) {
     override fun toString(): String {
         return GsonBuilder().setPrettyPrinting()

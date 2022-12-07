@@ -1,6 +1,7 @@
 package models.usuario
 
 import com.google.gson.GsonBuilder
+import utils.Cifrador
 import java.util.UUID
 import javax.persistence.Entity
 import javax.persistence.NamedQueries
@@ -22,7 +23,7 @@ class Encargado(
     email: String,
     password: String,
     perfil: Perfil = Perfil.ADMIN
-) : Usuario(id, uuid, nombre, apellido, email, password) {
+) : Usuario(id, uuid, nombre, apellido, email, Cifrador.encryptString(password)) {
     override fun toString(): String {
         return GsonBuilder().setPrettyPrinting()
             .create().toJson(this)
