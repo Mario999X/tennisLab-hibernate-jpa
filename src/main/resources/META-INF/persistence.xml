@@ -8,6 +8,10 @@
         <class>models.Adquisicion</class>
         <class>models.Encordar</class>
         <class>models.Personalizar</class>
+        <class>models.usuario.Encargado</class>
+        <class>models.usuario.Encargado</class>
+        <class>models.usuario.Encargado</class>
+        <class>models.usuario.Encargado</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:h2:mem:tennisLab;DB_CLOSE_DELAY=-1;"/>

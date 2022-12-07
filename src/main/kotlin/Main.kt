@@ -1,9 +1,7 @@
-import controllers.AdquisicionController
-import controllers.EncordarController
-import controllers.PersonalizarController
-import controllers.ProductoController
+import controllers.*
 import database.*
 import repository.adquisicion.AdquisicionRepositoryImpl
+import repository.encargado.EncargadoRepositoryImpl
 import repository.encordar.EncordarRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
@@ -17,6 +15,7 @@ fun main() {
     val adquisicionController = AdquisicionController(AdquisicionRepositoryImpl())
     val encordarController = EncordarController(EncordarRepositoryImpl())
     val personalizarController = PersonalizarController(PersonalizarRepositoryImpl())
+    val encargadoController = EncargadoController(EncargadoRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -34,6 +33,10 @@ fun main() {
     val personalizacionesInit = getPersonalizacionInit()
     personalizacionesInit.forEach { personalizacion ->
         personalizarController.createPersonalizacion(personalizacion)
+    }
+    val encargadosInit = getEncargadoInit()
+    encargadosInit.forEach { encargado ->
+        encargadoController.createEncargado(encargado)
     }
 
     //CRUD
@@ -109,6 +112,12 @@ fun main() {
     //Delete
     val personalizarDelete = personalizarController.getPersonalizacionById(personalizar[0].id)
     personalizarDelete?.let { if (personalizarController.deletePersonalizacion(it)) println("Personalización eliminada") }
+
+    //Encargado
+    //FindAll
+    val encargado = encargadoController.getEncargados()
+    encargado.forEach { println(it) }
+
 }
 
 fun initDataBase() {
