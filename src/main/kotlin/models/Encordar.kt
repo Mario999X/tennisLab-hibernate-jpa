@@ -24,10 +24,7 @@ class Encordar(
     @Expose val tensionCuerdasVerticales: Double,
     @Expose val cordajeVertical: String,
     @Expose var nudos: Int,
-    @Expose val precio: Double = 15.0,
-
-    @OneToOne(fetch = FetchType.EAGER)
-    val tarea: Tarea? = null
+    @Expose val precio: Double = 15.0
 ) {
     override fun toString(): String {
         return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()

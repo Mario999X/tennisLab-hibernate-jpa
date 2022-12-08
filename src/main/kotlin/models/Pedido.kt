@@ -1,6 +1,7 @@
 package models
 
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.Expose
 import models.usuario.Cliente
 import java.util.UUID
 import javax.persistence.*
@@ -15,13 +16,16 @@ import javax.persistence.*
 class Pedido(
     @Id
     val id: Long,
-    val uuid: UUID = UUID.randomUUID(),
-    var estado: TipoEstado,
-    var fechaEntrada: String,
-    var fechaProgramada: String,
-    var fechaSalida: String,
+    @Expose val uuid: UUID = UUID.randomUUID(),
+    @Expose var estado: TipoEstado,
+    @Expose var fechaEntrada: String,
+    @Expose var fechaProgramada: String,
+    @Expose var fechaSalida: String,
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true)
-    var cliente: Cliente? = null
+    var cliente: Cliente? = null,
+
+    @OneToOne(fetch = FetchType.EAGER)
+    val tarea: Tarea? = null
 ) {
     enum class TipoEstado(val estado: String) {
         RECIBIDO("RECIBIDO"),
@@ -41,7 +45,7 @@ class Pedido(
     }
 
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 
