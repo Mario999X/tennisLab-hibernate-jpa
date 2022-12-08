@@ -1,9 +1,6 @@
 package database
 
-import models.Adquisicion
-import models.Encordar
-import models.Personalizar
-import models.Producto
+import models.*
 import models.usuario.Cliente
 import models.usuario.Encargado
 import models.usuario.Trabajador
@@ -37,7 +34,8 @@ fun getClientesInit() = listOf(
         nombre = "Sebastian",
         apellido = "Mendoza",
         email = "email@email.com",
-        password = "1234"
+        password = "1234",
+        raquetas = getRaquetasInit().toMutableList()
     ),
     Cliente(
         id = 2L,
@@ -103,6 +101,19 @@ fun getProductosInit() = listOf(
         modelo = "Plastico",
         stock = 5,
         precio = 12.5
+    )
+)
+
+fun getRaquetasInit() = listOf(
+    Raqueta(
+        id = 1L,
+        marca = "Wilson",
+        modelo = "Pure",
+    ),
+    Raqueta(
+        id = 2L,
+        marca = "Prueba",
+        modelo = "Air",
     )
 )
 

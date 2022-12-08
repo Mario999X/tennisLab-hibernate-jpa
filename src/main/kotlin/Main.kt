@@ -6,6 +6,7 @@ import repository.encargado.EncargadoRepositoryImpl
 import repository.encordar.EncordarRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
+import repository.raqueta.RaquetaRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
 
 fun main() {
@@ -20,6 +21,7 @@ fun main() {
     val encargadoController = EncargadoController(EncargadoRepositoryImpl())
     val clienteController = ClienteController(ClienteRepositoryImpl())
     val trabajadorController = TrabajadorController(TrabajadorRepositoryImpl())
+    val raquetaController = RaquetaController(RaquetaRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -42,6 +44,11 @@ fun main() {
     encargadosInit.forEach { encargado ->
         encargadoController.createEncargado(encargado)
     }
+    val raquetasInit = getRaquetasInit()
+    raquetasInit.forEach { raquetas ->
+        raquetaController.createRaqueta(raquetas )
+    }
+
     val clientesInit = getClientesInit()
     clientesInit.forEach { cliente ->
         clienteController.createCliente(cliente)
@@ -142,6 +149,11 @@ fun main() {
     //Delete
     val encargadoDelete = encargadoController.getEncargadoById(encargado[0].id)
     encargadoDelete?.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
+
+    //Raqueta
+    //FindAll
+    var raqueta = raquetaController.getRaquetas()
+    raqueta.forEach { System.err.println(it) }
 
     //Cliente
     //FindAll

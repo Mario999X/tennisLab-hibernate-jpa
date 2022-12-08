@@ -11,6 +11,7 @@
         <class>models.usuario.Encargado</class>
         <class>models.usuario.Cliente</class>
         <class>models.usuario.Trabajador</class>
+        <class>models.Raqueta</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:h2:mem:tennisLab;DB_CLOSE_DELAY=-1;"/>
