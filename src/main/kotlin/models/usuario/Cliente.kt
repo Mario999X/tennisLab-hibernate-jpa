@@ -6,6 +6,9 @@ import utils.Cifrador
 import java.util.*
 import javax.persistence.*
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Table(name = "clientes")
 @NamedQueries(

@@ -4,6 +4,10 @@ import models.maquina.Personalizadora
 import mu.KotlinLogging
 import repository.personalizadora.PersonalizadoraRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class PersonalizadoraController(private val personalizadoraRepository: PersonalizadoraRepository) {

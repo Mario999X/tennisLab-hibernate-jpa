@@ -4,8 +4,12 @@ import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import models.maquina.Encordadora
 import models.maquina.Personalizadora
+import models.usuario.Trabajador
 import java.util.*
 import javax.persistence.*
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 
 @Entity
 @Table(name = "turnos")
@@ -26,9 +30,11 @@ data class Turno(
 
     @JoinColumn(name = "personalizadora_id")
     @OneToOne(fetch = FetchType.EAGER)
-    @Expose var personalizadora: Personalizadora? = null
+    @Expose var personalizadora: Personalizadora? = null,
 
-    // TODO TRABAJADOR no nulo, falta
+    @JoinColumn(name = "trabajador_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @Expose var trabajador: Trabajador
 ) {
 
     enum class TipoHorario(val horario: String) {

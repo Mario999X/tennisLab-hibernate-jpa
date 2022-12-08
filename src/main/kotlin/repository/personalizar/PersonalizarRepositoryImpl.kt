@@ -6,6 +6,10 @@ import models.Personalizar
 import mu.KotlinLogging
 import javax.persistence.TypedQuery
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class PersonalizarRepositoryImpl : PersonalizarRepository {

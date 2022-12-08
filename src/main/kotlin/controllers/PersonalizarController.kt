@@ -4,6 +4,10 @@ import models.Personalizar
 import mu.KotlinLogging
 import repository.personalizar.PersonalizarRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class PersonalizarController(private val personalizarRepository: PersonalizarRepository) {

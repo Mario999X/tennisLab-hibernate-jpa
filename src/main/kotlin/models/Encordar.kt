@@ -1,9 +1,13 @@
 package models
 
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.Expose
 import java.util.*
 import javax.persistence.*
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Table(name = "encordados")
 @NamedQueries(
@@ -14,16 +18,19 @@ import javax.persistence.*
 class Encordar(
     @Id
     val id: Long,
-    val uuid: UUID = UUID.randomUUID(),
-    val tensionCuerdasHorizontales: Double,
-    val cordajeHorizontal: String,
-    val tensionCuerdasVerticales: Double,
-    val cordajeVertical: String,
-    var nudos: Int,
-    val precio: Double = 15.0
+    @Expose val uuid: UUID = UUID.randomUUID(),
+    @Expose val tensionCuerdasHorizontales: Double,
+    @Expose val cordajeHorizontal: String,
+    @Expose val tensionCuerdasVerticales: Double,
+    @Expose val cordajeVertical: String,
+    @Expose var nudos: Int,
+    @Expose val precio: Double = 15.0,
+
+    @OneToOne(fetch = FetchType.EAGER)
+    val tarea: Tarea? = null
 ) {
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 }

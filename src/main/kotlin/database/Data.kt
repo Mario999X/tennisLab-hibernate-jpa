@@ -8,6 +8,10 @@ import models.usuario.Encargado
 import models.usuario.Trabajador
 import java.time.LocalDate
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 fun getEncargadoInit() = listOf(
     Encargado(
         id = 1L,
@@ -255,6 +259,17 @@ fun getTurnosInit() = listOf(
     Turno(
         id = 1L,
         horario = Turno.TipoHorario.TEMPRANO,
-        encordadora = getEncordadorasInit()[0]
+        encordadora = getEncordadorasInit()[0],
+        trabajador = getTrabajadorInit()[2]
+    )
+)
+
+fun getTareasInit() = listOf(
+    Tarea(
+        id = 1L,
+        adquisicion = getAdquisicionInit()[1],
+        personalizar = getPersonalizacionInit()[1],
+        encordar = getEncordadosInit()[1],
+        trabajador = getTrabajadorInit()[1]
     )
 )

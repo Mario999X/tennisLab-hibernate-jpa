@@ -4,6 +4,10 @@ import models.Adquisicion
 import mu.KotlinLogging
 import repository.adquisicion.AdquisicionRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class AdquisicionController(private val adquisicionRepository: AdquisicionRepository) {

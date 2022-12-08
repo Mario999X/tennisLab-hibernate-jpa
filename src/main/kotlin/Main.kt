@@ -15,10 +15,15 @@ import repository.pedido.PedidoRepositoryImpl
 import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
+import repository.tarea.TareaRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
 import repository.turno.TurnoRepositoryImpl
 
-fun main() {
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
+fun main(args: Array<String>) {
 
     initDataBase()
 
@@ -33,6 +38,7 @@ fun main() {
     val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
     val turnoController = TurnoController(TurnoRepositoryImpl())
+    val tareaController = TareaController(TareaRepositoryImpl())
     val pedidoController = PedidoController(PedidoRepositoryImpl())
 
     //Inserción de datos
@@ -80,9 +86,15 @@ fun main() {
     turnosInit.forEach { turno ->
         turnoController.createTurno(turno)
     }
+
+    val tareasInit = getTareasInit()
+    tareasInit.forEach { tarea ->
+        tareaController.createTarea(tarea)
+
     val pedidosInit = getPedidosInit()
     pedidosInit.forEach { pedidos ->
         pedidoController.createPedido(pedidos)
+
     }
 
     //CRUD
@@ -286,6 +298,25 @@ fun main() {
         turnoController.deleteTurno(it)
     }
     println(turnoController.getTurnos())
+
+    // TAREAS
+    // FindAll
+    val tareas = tareaController.getTareas()
+    println(tareas)
+    // FindById
+    val tarea = tareaController.getTareaById(tareas[0].id)
+    println(tarea)
+    // Update
+    tarea?.let {
+        it.trabajador = getTrabajadorInit()[2]
+        tareaController.updateTarea(it)
+    }
+    println(tareaController.getTareas())
+    // Delete
+    tarea?.let {
+        tareaController.deleteTarea(it)
+    }
+    println(tareaController.getTareas())
 
 }
 

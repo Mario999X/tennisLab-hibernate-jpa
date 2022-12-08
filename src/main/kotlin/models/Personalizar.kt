@@ -1,9 +1,13 @@
 package models
 
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.Expose
 import java.util.*
 import javax.persistence.*
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Table(name = "personalizaciones")
 @NamedQueries(
@@ -14,14 +18,17 @@ import javax.persistence.*
 class Personalizar(
     @Id
     val id: Long,
-    val uuid: UUID = UUID.randomUUID(),
-    var peso: Double,
-    val balance: Double,
-    val rigidez: Int,
-    val precio: Double = 60.0
+    @Expose val uuid: UUID = UUID.randomUUID(),
+    @Expose var peso: Double,
+    @Expose val balance: Double,
+    @Expose val rigidez: Int,
+    @Expose val precio: Double = 60.0,
+
+    @OneToOne(fetch = FetchType.EAGER)
+    val tarea: Tarea? = null
 ) {
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 }

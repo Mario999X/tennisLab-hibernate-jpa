@@ -4,6 +4,10 @@ import models.usuario.Encargado
 import mu.KotlinLogging
 import repository.encargado.EncargadoRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class EncargadoController(private val encargadoRepository: EncargadoRepository) {

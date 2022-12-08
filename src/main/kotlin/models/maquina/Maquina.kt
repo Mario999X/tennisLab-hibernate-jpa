@@ -8,6 +8,9 @@ import javax.persistence.Id
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 class Maquina(

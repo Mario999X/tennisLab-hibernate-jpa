@@ -4,6 +4,10 @@ import models.Producto
 import mu.KotlinLogging
 import repository.producto.ProductoRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class ProductoController(private val productoRepository: ProductoRepository) {

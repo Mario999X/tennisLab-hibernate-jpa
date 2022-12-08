@@ -4,6 +4,10 @@ import models.Encordar
 import mu.KotlinLogging
 import repository.encordar.EncordarRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class EncordarController(private val encordarRepository: EncordarRepository) {
