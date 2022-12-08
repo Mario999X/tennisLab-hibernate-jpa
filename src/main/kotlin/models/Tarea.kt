@@ -40,7 +40,11 @@ data class Tarea(
 
     @JoinColumn(name = "trabajador_id")
     @OneToOne(fetch = FetchType.EAGER)
-    @Expose var trabajador: Trabajador
+    @Expose var trabajador: Trabajador,
+
+    @ManyToOne()
+    @JoinColumn(name = "pedido_id")
+    var pedido: Pedido? = null
 ) {
 
     override fun toString(): String {
