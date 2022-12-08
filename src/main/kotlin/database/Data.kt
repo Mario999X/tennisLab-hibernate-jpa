@@ -1,9 +1,12 @@
 package database
 
 import models.*
+import models.maquina.Encordadora
+import models.maquina.Personalizadora
 import models.usuario.Cliente
 import models.usuario.Encargado
 import models.usuario.Trabajador
+import java.time.LocalDate
 
 fun getEncargadoInit() = listOf(
     Encargado(
@@ -180,4 +183,58 @@ fun getPersonalizacionInit() = listOf(
         balance = 1.1,
         rigidez = 4
     ),
+)
+
+fun getEncordadorasInit() = listOf(
+    Encordadora(
+        id = 1L,
+        marca = "Toshiba",
+        modelo = "ABC",
+        fechaAdquisicion = LocalDate.now().minusDays(10).toString(),
+        numSerie = 120L,
+        isManual = true,
+        tensionMax = 23.2,
+        tensionMin = 20.5
+    ),
+    Encordadora(
+        id = 2L,
+        marca = "BBBBBBBBBBB",
+        modelo = "ACB",
+        fechaAdquisicion = LocalDate.now().minusDays(20).toString(),
+        numSerie = 120L,
+        isManual = false,
+        tensionMax = 23.2,
+        tensionMin = 20.5
+    )
+)
+
+fun getPersonalizadorasInit() = listOf(
+    Personalizadora(
+        id = 1L,
+        marca = "AAAAAAAAAAAAAA",
+        modelo = "ABC",
+        fechaAdquisicion = LocalDate.now().minusDays(50).toString(),
+        numSerie = 120L,
+        maniobrabilidad = true,
+        balance = false,
+        rigidez = false
+    ),
+    Personalizadora(
+        id = 2L,
+        marca = "ZZZZZZZZZ",
+        modelo = "ZZZ",
+        fechaAdquisicion = LocalDate.now().minusDays(60).toString(),
+        numSerie = 340L,
+        maniobrabilidad = true,
+        balance = true,
+        rigidez = false
+    )
+)
+
+fun getTurnosInit() = listOf(
+    Turno(
+        id = 1L,
+        horario = Turno.TipoHorario.TEMPRANO,
+        encordadora = getEncordadorasInit()[0]
+    )
 )
