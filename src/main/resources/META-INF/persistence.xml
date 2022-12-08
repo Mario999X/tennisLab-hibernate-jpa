@@ -14,6 +14,7 @@
         <class>models.maquina.Encordadora</class>
         <class>models.maquina.Personalizadora</class>
         <class>models.Turno</class>
+        <class>models.Raqueta</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:h2:mem:tennisLab;DB_CLOSE_DELAY=-1;"/>

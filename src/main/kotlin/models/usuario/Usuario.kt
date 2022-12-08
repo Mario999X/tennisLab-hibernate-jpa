@@ -1,15 +1,13 @@
 package models.usuario
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Inheritance
-import javax.persistence.InheritanceType
+import javax.persistence.*
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 class Usuario(
     @Id
+    @Column(name = "id")
     val id: Long,
     val uuid: UUID = UUID.randomUUID(),
     var nombre: String,

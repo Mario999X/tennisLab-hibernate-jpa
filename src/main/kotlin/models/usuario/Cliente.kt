@@ -1,12 +1,10 @@
 package models.usuario
 
 import com.google.gson.GsonBuilder
+import models.Raqueta
 import utils.Cifrador
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.NamedQueries
-import javax.persistence.NamedQuery
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "clientes")
@@ -22,7 +20,9 @@ class Cliente(
     apellido: String,
     email: String,
     password: String,
-    perfil: Perfil = Perfil.TENISTA
+    perfil: Perfil = Perfil.TENISTA,
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", orphanRemoval = true)
+    var raquetas: MutableList<Raqueta> = mutableListOf()
 ) : Usuario(id, uuid, nombre, apellido, email, Cifrador.encryptString(password)) {
     override fun toString(): String {
         return GsonBuilder().setPrettyPrinting()

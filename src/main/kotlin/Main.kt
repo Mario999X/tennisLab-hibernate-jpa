@@ -13,6 +13,7 @@ import repository.encordar.EncordarRepositoryImpl
 import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
+import repository.raqueta.RaquetaRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
 import repository.turno.TurnoRepositoryImpl
 
@@ -31,6 +32,7 @@ fun main() {
     val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
     val turnoController = TurnoController(TurnoRepositoryImpl())
+    val raquetaController = RaquetaController(RaquetaRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -53,6 +55,11 @@ fun main() {
     encargadosInit.forEach { encargado ->
         encargadoController.createEncargado(encargado)
     }
+    val raquetasInit = getRaquetasInit()
+    raquetasInit.forEach { raquetas ->
+        raquetaController.createRaqueta(raquetas )
+    }
+
     val clientesInit = getClientesInit()
     clientesInit.forEach { cliente ->
         clienteController.createCliente(cliente)
@@ -165,6 +172,11 @@ fun main() {
     //Delete
     val encargadoDelete = encargadoController.getEncargadoById(encargado[0].id)
     encargadoDelete?.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
+
+    //Raqueta
+    //FindAll
+    var raqueta = raquetaController.getRaquetas()
+    raqueta.forEach { System.err.println(it) }
 
     //Cliente
     //FindAll
