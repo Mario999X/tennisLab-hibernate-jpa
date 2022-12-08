@@ -35,14 +35,14 @@ fun getEncargadoInit() = listOf(
         password = "4321"
     )
 )
+
 fun getClientesInit() = listOf(
     Cliente(
         id = 1L,
         nombre = "Sebastian",
         apellido = "Mendoza",
         email = "email@email.com",
-        password = "1234",
-        raquetas = getRaquetasInit().toMutableList()
+        password = "1234"
     ),
     Cliente(
         id = 2L,
@@ -113,15 +113,17 @@ fun getProductosInit() = listOf(
 
 fun getRaquetasInit() = listOf(
     Raqueta(
-        id = 1L,
         marca = "Wilson",
         modelo = "Pure",
     ),
     Raqueta(
-        id = 2L,
         marca = "Prueba",
         modelo = "Air",
-    )
+    ),
+    Raqueta(
+        marca = "Nike",
+        modelo = "Parallel",
+    ),
 )
 
 fun getAdquisicionInit() = listOf(
@@ -187,6 +189,24 @@ fun getPersonalizacionInit() = listOf(
         balance = 1.1,
         rigidez = 4
     ),
+)
+
+fun getPedidosInit() = listOf(
+    Pedido(
+        id = 1L,
+        estado = Pedido.TipoEstado.RECIBIDO,
+        fechaEntrada = LocalDate.now().toString(),
+        fechaProgramada = LocalDate.now().plusDays(1).toString(),
+        fechaSalida = LocalDate.now().plusDays(2).toString()
+    ),
+    Pedido(
+        id = 2L,
+        estado = Pedido.TipoEstado.PROCESANDO,
+        fechaEntrada = LocalDate.now().toString(),
+        fechaProgramada = LocalDate.now().plusDays(1).toString(),
+        fechaSalida = LocalDate.now().plusDays(2).toString(),
+        cliente = getClientesInit()[0]
+    )
 )
 
 fun getEncordadorasInit() = listOf(

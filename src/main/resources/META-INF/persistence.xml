@@ -16,6 +16,7 @@
         <class>models.Turno</class>
         <class>models.Raqueta</class>
         <class>models.Tarea</class>
+        <class>models.Pedido</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:h2:mem:tennisLab;DB_CLOSE_DELAY=-1;"/>
