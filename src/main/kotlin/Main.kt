@@ -13,7 +13,6 @@ import repository.encordar.EncordarRepositoryImpl
 import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
-import repository.raqueta.RaquetaRepositoryImpl
 import repository.tarea.TareaRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
 import repository.turno.TurnoRepositoryImpl
@@ -37,7 +36,6 @@ fun main(args: Array<String>) {
     val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
     val turnoController = TurnoController(TurnoRepositoryImpl())
-    val raquetaController = RaquetaController(RaquetaRepositoryImpl())
     val tareaController = TareaController(TareaRepositoryImpl())
 
     //Inserción de datos
@@ -62,9 +60,6 @@ fun main(args: Array<String>) {
         encargadoController.createEncargado(encargado)
     }
     val raquetasInit = getRaquetasInit()
-    raquetasInit.forEach { raquetas ->
-        raquetaController.createRaqueta(raquetas )
-    }
 
     val clientesInit = getClientesInit()
     clientesInit.forEach { cliente ->
@@ -182,11 +177,6 @@ fun main(args: Array<String>) {
     //Delete
     val encargadoDelete = encargadoController.getEncargadoById(encargado[0].id)
     encargadoDelete?.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
-
-    //Raqueta
-    //FindAll
-    val raqueta = raquetaController.getRaquetas()
-    raqueta.forEach { System.err.println(it) }
 
     //Cliente
     //FindAll
