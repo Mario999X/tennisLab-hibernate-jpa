@@ -15,7 +15,7 @@ import javax.persistence.*
 )
 class Pedido(
     @Id
-    @Expose val id: Long,
+    val id: Long,
     @Expose val uuid: UUID = UUID.randomUUID(),
     @Expose var estado: TipoEstado,
     @Expose var fechaEntrada: String,
@@ -44,7 +44,7 @@ class Pedido(
     }
 
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 }

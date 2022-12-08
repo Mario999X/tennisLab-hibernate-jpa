@@ -38,8 +38,8 @@ fun main(args: Array<String>) {
     val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
     val turnoController = TurnoController(TurnoRepositoryImpl())
-    val tareaController = TareaController(TareaRepositoryImpl())
     val pedidoController = PedidoController(PedidoRepositoryImpl())
+    val tareaController = TareaController(TareaRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -87,15 +87,15 @@ fun main(args: Array<String>) {
         turnoController.createTurno(turno)
     }
 
-    val tareasInit = getTareasInit()
-    tareasInit.forEach { tarea ->
-        tareaController.createTarea(tarea)
-    }
-
     val pedidosInit = getPedidosInit()
     pedidosInit.forEach { pedidos ->
         pedidoController.createPedido(pedidos)
 
+    }
+
+    val tareasInit = getTareasInit()
+    tareasInit.forEach { tarea ->
+        tareaController.createTarea(tarea)
     }
 
     //CRUD
@@ -262,6 +262,7 @@ fun main(args: Array<String>) {
         encordadoraController.deleteEncordadora(it)
     }
     println(encordadoraController.getEncordadoras())
+    
     // PERSONALIZADORAS
     // FindAll
     val personalizadoras = personalizadoraController.getPersonalizadoras()
@@ -280,25 +281,6 @@ fun main(args: Array<String>) {
         personalizadoraController.deletePersonalizadora(it)
     }
     println(personalizadoraController.getPersonalizadoras())
-
-    // TURNOS
-    // FindAll
-    val turnos = turnoController.getTurnos()
-    println(turnos)
-    // FindById
-    val turno = turnoController.getTurnoById(turnos[0].id)
-    println(turno)
-    // Update
-    turno?.let {
-        it.encordadora = null
-        turnoController.updateTurno(it)
-    }
-    println(turnoController.getTurnos())
-    // Delete
-    turno?.let {
-        turnoController.deleteTurno(it)
-    }
-    println(turnoController.getTurnos())
 
     // TAREAS
     // FindAll
@@ -319,6 +301,24 @@ fun main(args: Array<String>) {
     }
     println(tareaController.getTareas())
 
+    // TURNOS
+    // FindAll
+    val turnos = turnoController.getTurnos()
+    println(turnos)
+    // FindById
+    val turno = turnoController.getTurnoById(turnos[0].id)
+    println(turno)
+    // Update
+    turno?.let {
+        it.encordadora = null
+        turnoController.updateTurno(it)
+    }
+    println(turnoController.getTurnos())
+    // Delete
+    turno?.let {
+        turnoController.deleteTurno(it)
+    }
+    println(turnoController.getTurnos())
 
 }
 
