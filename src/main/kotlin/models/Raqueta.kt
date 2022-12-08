@@ -1,30 +1,11 @@
 package models
 
-import com.google.gson.GsonBuilder
-import models.usuario.Cliente
 import java.util.*
-import javax.persistence.*
+import javax.persistence.Embeddable
 
-@Entity
-@Table(name = "raqueta")
-@NamedQueries(
-    value = [
-        NamedQuery(name = "Raqueta.findAll", query = "select r from Raqueta r")
-    ]
-)
-class Raqueta(
-    @Id
-    @Column(name = "id")
-    val id: Long,
-    val uuid: UUID = UUID.randomUUID(),
+@Embeddable
+data class Raqueta(
+    var uuid: UUID = UUID.randomUUID(),
     var marca: String,
-    var modelo: String,
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cliente_id", nullable = true)
-    var cliente: Cliente? = null
-) {
-    override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
-            .create().toJson(this)
-    }
-}
+    var modelo: String
+)

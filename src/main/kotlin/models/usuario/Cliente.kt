@@ -21,8 +21,13 @@ class Cliente(
     email: String,
     password: String,
     perfil: Perfil = Perfil.TENISTA,
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", orphanRemoval = true)
-    var raquetas: MutableList<Raqueta> = mutableListOf()
+    @Embedded
+    @AttributeOverrides(
+        AttributeOverride(name = "uuid", column = Column(name = "raqueta_uuid")),
+        AttributeOverride(name = "marca", column = Column(name = "raqueta_marca")),
+        AttributeOverride(name = "modelo", column = Column(name = "raqueta_modelo"))
+    )
+    var raqueta: Raqueta? = null
 ) : Usuario(id, uuid, nombre, apellido, email, Cifrador.encryptString(password)) {
     override fun toString(): String {
         return GsonBuilder().setPrettyPrinting()

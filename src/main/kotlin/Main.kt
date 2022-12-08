@@ -5,15 +5,16 @@ import controllers.usuario.ClienteController
 import controllers.usuario.EncargadoController
 import controllers.usuario.TrabajadorController
 import database.*
+import models.Pedido
 import repository.adquisicion.AdquisicionRepositoryImpl
 import repository.cliente.ClienteRepositoryImpl
 import repository.encargado.EncargadoRepositoryImpl
 import repository.encordadora.EncordadoraRepositoryImpl
 import repository.encordar.EncordarRepositoryImpl
+import repository.pedido.PedidoRepositoryImpl
 import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
-import repository.raqueta.RaquetaRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
 import repository.turno.TurnoRepositoryImpl
 
@@ -32,7 +33,7 @@ fun main() {
     val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
     val turnoController = TurnoController(TurnoRepositoryImpl())
-    val raquetaController = RaquetaController(RaquetaRepositoryImpl())
+    val pedidoController = PedidoController(PedidoRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -56,11 +57,10 @@ fun main() {
         encargadoController.createEncargado(encargado)
     }
     val raquetasInit = getRaquetasInit()
-    raquetasInit.forEach { raquetas ->
-        raquetaController.createRaqueta(raquetas )
-    }
-
     val clientesInit = getClientesInit()
+    clientesInit.forEachIndexed { index, cliente ->
+        cliente.raqueta = raquetasInit[index]
+    }
     clientesInit.forEach { cliente ->
         clienteController.createCliente(cliente)
     }
@@ -79,6 +79,10 @@ fun main() {
     val turnosInit = getTurnosInit()
     turnosInit.forEach { turno ->
         turnoController.createTurno(turno)
+    }
+    val pedidosInit = getPedidosInit()
+    pedidosInit.forEach { pedidos ->
+        pedidoController.createPedido(pedidos)
     }
 
     //CRUD
@@ -173,11 +177,6 @@ fun main() {
     val encargadoDelete = encargadoController.getEncargadoById(encargado[0].id)
     encargadoDelete?.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
 
-    //Raqueta
-    //FindAll
-    var raqueta = raquetaController.getRaquetas()
-    raqueta.forEach { System.err.println(it) }
-
     //Cliente
     //FindAll
     val cliente = clienteController.getClientes()
@@ -193,8 +192,26 @@ fun main() {
     }
     println(clienteUpdate)
     //Delete
-    val clienteDelete = clienteController.getClienteById(cliente[0].id)
+    val clienteDelete = clienteController.getClienteById(cliente[1].id)
     clienteDelete?.let { if (clienteController.deleteCliente(it)) println("Cliente eliminado") }
+
+    //Pedido
+    //FindAll
+    val pedidos = pedidoController.getPedidos()
+    pedidos.forEach { println(it) }
+    //FindById
+    val pedidoId = pedidoController.getPedidoById(pedidos[0].id)
+    pedidoId?.let { println(it) }
+    //Update
+    val pedidoUpdate = pedidoController.getPedidoById(pedidos[0].id)
+    pedidoUpdate?.let {
+        it.estado = Pedido.TipoEstado.PROCESANDO
+        pedidoController.updatePedido(it)
+    }
+    println(pedidoUpdate)
+    //Delete
+    val pedidoDelete = pedidoController.getPedidoById(pedidos[0].id)
+    pedidoDelete?.let { if (pedidoController.deletePedido(it)) println("Pedido eliminado") }
 
     //Trabajador
     //FindAll
