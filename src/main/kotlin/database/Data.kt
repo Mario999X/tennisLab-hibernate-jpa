@@ -4,9 +4,12 @@ import models.Adquisicion
 import models.Encordar
 import models.Personalizar
 import models.Producto
+import models.maquina.Encordadora
+import models.maquina.Personalizadora
 import models.usuario.Cliente
 import models.usuario.Encargado
 import models.usuario.Trabajador
+import java.time.LocalDate
 
 fun getEncargadoInit() = listOf(
     Encargado(
@@ -169,4 +172,30 @@ fun getPersonalizacionInit() = listOf(
         balance = 1.1,
         rigidez = 4
     ),
+)
+
+fun getEncordadorasInit() = listOf(
+    Encordadora(
+        id = 1L,
+        marca = "Toshiba",
+        modelo = "ABC",
+        fechaAdquisicion = LocalDate.now().minusDays(10).toString(),
+        numSerie = 120L,
+        isManual = true,
+        tensionMax = 23.2,
+        tensionMin = 20.5
+    )
+)
+
+fun getPersonalizadorasInit() = listOf(
+    Personalizadora(
+        id = 1L,
+        marca = "AAAAAAAAAAAAAA",
+        modelo = "ABC",
+        fechaAdquisicion = LocalDate.now().minusDays(50).toString(),
+        numSerie = 120L,
+        maniobrabilidad = true,
+        balance = false,
+        rigidez = false
+    )
 )

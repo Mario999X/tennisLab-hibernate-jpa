@@ -1,9 +1,16 @@
 import controllers.*
+import controllers.maquina.EncordadoraController
+import controllers.maquina.PersonalizadoraController
+import controllers.usuario.ClienteController
+import controllers.usuario.EncargadoController
+import controllers.usuario.TrabajadorController
 import database.*
 import repository.adquisicion.AdquisicionRepositoryImpl
 import repository.cliente.ClienteRepositoryImpl
 import repository.encargado.EncargadoRepositoryImpl
+import repository.encordadora.EncordadoraRepositoryImpl
 import repository.encordar.EncordarRepositoryImpl
+import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
@@ -20,6 +27,8 @@ fun main() {
     val encargadoController = EncargadoController(EncargadoRepositoryImpl())
     val clienteController = ClienteController(ClienteRepositoryImpl())
     val trabajadorController = TrabajadorController(TrabajadorRepositoryImpl())
+    val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
+    val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -49,6 +58,14 @@ fun main() {
     val trabajadoresInit = getTrabajadorInit()
     trabajadoresInit.forEach { trabajadores ->
         trabajadorController.createTrabajador(trabajadores)
+    }
+    val encordadorasInit = getEncordadorasInit()
+    encordadorasInit.forEach { encordadora ->
+        encordadoraController.createEncordadora(encordadora)
+    }
+    val personalizadorasInit = getPersonalizadorasInit()
+    personalizadorasInit.forEach { personalizadora ->
+        personalizadoraController.createPersonalizadora(personalizadora)
     }
 
     //CRUD
@@ -178,6 +195,44 @@ fun main() {
     //Delete
     val trabajadorDelete = trabajadorController.getTrabajadorById(trabajador[0].id)
     trabajadorDelete?.let { if (trabajadorController.deleteTrabajador(it)) println("Trabajador eliminado") }
+
+    // ENCORDADORAS
+    // FindAll
+    val encordadoras = encordadoraController.getEncordadoras()
+    println(encordadoras)
+    // FindById
+    val encordadora = encordadoraController.getEncordadoraById(encordadoras[0].id)
+    println(encordadora)
+    // Update
+    encordadora?.let {
+        it.isManual = false
+        encordadoraController.updateEncordadora(it)
+    }
+    println(encordadoraController.getEncordadoras())
+    // Delete
+    encordadora?.let {
+        encordadoraController.deleteEncordadora(it)
+    }
+    println(encordadoraController.getEncordadoras())
+
+    // PERSONALIZADORAS
+    // FindAll
+    val personalizadoras = personalizadoraController.getPersonalizadoras()
+    println(personalizadoras)
+    // FindById
+    val personalizadora = personalizadoraController.getPersonalizadoraById(personalizadoras[0].id)
+    println(personalizadoras)
+    // Update
+    personalizadora?.let {
+        it.maniobrabilidad = false
+        personalizadoraController.updatePersonalizadora(it)
+    }
+    println(personalizadoraController.getPersonalizadoras())
+    // Delete
+    personalizadora?.let {
+        personalizadoraController.deletePersonalizadora(it)
+    }
+    println(personalizadoraController.getPersonalizadoras())
 
 }
 
