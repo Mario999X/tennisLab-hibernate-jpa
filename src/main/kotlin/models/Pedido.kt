@@ -7,7 +7,7 @@ import java.util.UUID
 import javax.persistence.*
 
 @Entity
-@Table(name = "pedido")
+@Table(name = "pedidos")
 @NamedQueries(
     value = [
         NamedQuery(name = "Pedido.findAll", query = "select p from Pedido p")
@@ -22,10 +22,9 @@ class Pedido(
     @Expose var fechaProgramada: String,
     @Expose var fechaSalida: String,
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true)
-    var cliente: Cliente? = null,
-
-    @OneToOne(fetch = FetchType.EAGER)
-    val tarea: Tarea? = null
+    @Expose var cliente: Cliente? = null,
+    @OneToMany(mappedBy = "pedido", orphanRemoval = true, fetch = FetchType.EAGER)
+    @Expose var tareas: MutableList<Tarea> = mutableListOf()
 ) {
     enum class TipoEstado(val estado: String) {
         RECIBIDO("RECIBIDO"),
@@ -48,5 +47,4 @@ class Pedido(
         return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
-
 }

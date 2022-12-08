@@ -198,7 +198,8 @@ fun getPedidosInit() = listOf(
         fechaEntrada = LocalDate.now().toString(),
         fechaProgramada = LocalDate.now().plusDays(1).toString(),
         fechaSalida = LocalDate.now().plusDays(2).toString(),
-        cliente = getClientesInit()[2]
+        cliente = getClientesInit()[2],
+        tareas = getTareasInit().toMutableList()
     ),
     Pedido(
         id = 2L,
@@ -206,7 +207,8 @@ fun getPedidosInit() = listOf(
         fechaEntrada = LocalDate.now().toString(),
         fechaProgramada = LocalDate.now().plusDays(1).toString(),
         fechaSalida = LocalDate.now().plusDays(2).toString(),
-        cliente = getClientesInit()[0]
+        cliente = getClientesInit()[0],
+        tareas = getTareasInit().toMutableList()
     )
 )
 

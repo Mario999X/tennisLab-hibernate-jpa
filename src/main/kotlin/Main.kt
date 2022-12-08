@@ -262,6 +262,7 @@ fun main(args: Array<String>) {
         encordadoraController.deleteEncordadora(it)
     }
     println(encordadoraController.getEncordadoras())
+    
     // PERSONALIZADORAS
     // FindAll
     val personalizadoras = personalizadoraController.getPersonalizadoras()
@@ -280,6 +281,25 @@ fun main(args: Array<String>) {
         personalizadoraController.deletePersonalizadora(it)
     }
     println(personalizadoraController.getPersonalizadoras())
+
+    // TAREAS
+    // FindAll
+    val tareas = tareaController.getTareas()
+    println(tareas)
+    // FindById
+    val tarea = tareaController.getTareaById(tareas[0].id)
+    println(tarea)
+    // Update
+    tarea?.let {
+        it.trabajador = getTrabajadorInit()[2]
+        tareaController.updateTarea(it)
+    }
+    println(tareaController.getTareas())
+    // Delete
+    tarea?.let {
+        tareaController.deleteTarea(it)
+    }
+    println(tareaController.getTareas())
 
     // TURNOS
     // FindAll
@@ -300,25 +320,8 @@ fun main(args: Array<String>) {
     }
     println(turnoController.getTurnos())
 
-    // TAREAS
-    // FindAll
-    val tareas = tareaController.getTareas()
-    println(tareas)
-    // FindById
-    val tarea = tareaController.getTareaById(tareas[0].id)
-    println(tarea)
-    // Update
-    tarea?.let {
-        it.trabajador = getTrabajadorInit()[2]
-        tareaController.updateTarea(it)
-    }
-    println(tareaController.getTareas())
-    // Delete
-    tarea?.let {
-        tareaController.deleteTarea(it)
-    }
-    println(tareaController.getTareas())
 }
+
 
 fun initDataBase() {
     HibernateManager.open()
