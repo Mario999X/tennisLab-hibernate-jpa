@@ -1,9 +1,6 @@
 package database
 
-import models.Adquisicion
-import models.Encordar
-import models.Personalizar
-import models.Producto
+import models.*
 import models.maquina.Encordadora
 import models.maquina.Personalizadora
 import models.usuario.Cliente
@@ -184,6 +181,16 @@ fun getEncordadorasInit() = listOf(
         isManual = true,
         tensionMax = 23.2,
         tensionMin = 20.5
+    ),
+    Encordadora(
+        id = 2L,
+        marca = "BBBBBBBBBBB",
+        modelo = "ACB",
+        fechaAdquisicion = LocalDate.now().minusDays(20).toString(),
+        numSerie = 120L,
+        isManual = false,
+        tensionMax = 23.2,
+        tensionMin = 20.5
     )
 )
 
@@ -197,5 +204,23 @@ fun getPersonalizadorasInit() = listOf(
         maniobrabilidad = true,
         balance = false,
         rigidez = false
+    ),
+    Personalizadora(
+        id = 2L,
+        marca = "ZZZZZZZZZ",
+        modelo = "ZZZ",
+        fechaAdquisicion = LocalDate.now().minusDays(60).toString(),
+        numSerie = 340L,
+        maniobrabilidad = true,
+        balance = true,
+        rigidez = false
+    )
+)
+
+fun getTurnosInit() = listOf(
+    Turno(
+        id = 1L,
+        horario = Turno.TipoHorario.TEMPRANO,
+        encordadora = getEncordadorasInit()[0]
     )
 )

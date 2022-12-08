@@ -2,11 +2,9 @@ package models.maquina
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
+import models.Turno
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.NamedQueries
-import javax.persistence.NamedQuery
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "encordadoras")
@@ -25,10 +23,13 @@ class Encordadora(
     @Expose var isManual: Boolean,
     @Expose var tensionMax: Double,
     @Expose var tensionMin: Double,
+
+    @OneToOne(fetch = FetchType.EAGER)
+    var turno: Turno? = null,
 ) : Maquina(id, uuid, marca, modelo, fechaAdquisicion, numSerie) {
 
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 }

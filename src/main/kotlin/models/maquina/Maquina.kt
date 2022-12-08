@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 class Maquina(
     @Id
-    @Expose val id: Long,
+    val id: Long,
     @Expose val uuid: UUID,
     @Expose var marca: String,
     @Expose var modelo: String,
@@ -21,7 +21,7 @@ class Maquina(
 ) {
 
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 }

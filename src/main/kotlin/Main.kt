@@ -14,6 +14,7 @@ import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
+import repository.turno.TurnoRepositoryImpl
 
 fun main() {
 
@@ -29,6 +30,7 @@ fun main() {
     val trabajadorController = TrabajadorController(TrabajadorRepositoryImpl())
     val encordadoraController = EncordadoraController(EncordadoraRepositoryImpl())
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
+    val turnoController = TurnoController(TurnoRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -66,6 +68,10 @@ fun main() {
     val personalizadorasInit = getPersonalizadorasInit()
     personalizadorasInit.forEach { personalizadora ->
         personalizadoraController.createPersonalizadora(personalizadora)
+    }
+    val turnosInit = getTurnosInit()
+    turnosInit.forEach { turno ->
+        turnoController.createTurno(turno)
     }
 
     //CRUD
@@ -201,7 +207,7 @@ fun main() {
     val encordadoras = encordadoraController.getEncordadoras()
     println(encordadoras)
     // FindById
-    val encordadora = encordadoraController.getEncordadoraById(encordadoras[0].id)
+    val encordadora = encordadoraController.getEncordadoraById(encordadoras[1].id)
     println(encordadora)
     // Update
     encordadora?.let {
@@ -214,13 +220,12 @@ fun main() {
         encordadoraController.deleteEncordadora(it)
     }
     println(encordadoraController.getEncordadoras())
-
     // PERSONALIZADORAS
     // FindAll
     val personalizadoras = personalizadoraController.getPersonalizadoras()
     println(personalizadoras)
     // FindById
-    val personalizadora = personalizadoraController.getPersonalizadoraById(personalizadoras[0].id)
+    val personalizadora = personalizadoraController.getPersonalizadoraById(personalizadoras[1].id)
     println(personalizadoras)
     // Update
     personalizadora?.let {
@@ -233,6 +238,25 @@ fun main() {
         personalizadoraController.deletePersonalizadora(it)
     }
     println(personalizadoraController.getPersonalizadoras())
+
+    // TURNOS
+    // FindAll
+    val turnos = turnoController.getTurnos()
+    println(turnos)
+    // FindById
+    val turno = turnoController.getTurnoById(turnos[0].id)
+    println(turno)
+    // Update
+    turno?.let {
+        it.encordadora = null
+        turnoController.updateTurno(it)
+    }
+    println(turnoController.getTurnos())
+    // Delete
+    turno?.let {
+        turnoController.deleteTurno(it)
+    }
+    println(turnoController.getTurnos())
 
 }
 
