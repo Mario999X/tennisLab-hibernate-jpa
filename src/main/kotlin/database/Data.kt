@@ -197,7 +197,8 @@ fun getPedidosInit() = listOf(
         estado = Pedido.TipoEstado.RECIBIDO,
         fechaEntrada = LocalDate.now().toString(),
         fechaProgramada = LocalDate.now().plusDays(1).toString(),
-        fechaSalida = LocalDate.now().plusDays(2).toString()
+        fechaSalida = LocalDate.now().plusDays(2).toString(),
+        cliente = getClientesInit()[2]
     ),
     Pedido(
         id = 2L,
