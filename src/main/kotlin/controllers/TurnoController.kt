@@ -4,6 +4,10 @@ import models.Turno
 import mu.KotlinLogging
 import repository.turno.TurnoRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class TurnoController(private val turnoRepository: TurnoRepository) {

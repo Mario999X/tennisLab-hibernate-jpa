@@ -4,6 +4,10 @@ import models.usuario.Trabajador
 import mu.KotlinLogging
 import repository.trabajador.TrabajadorRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class TrabajadorController(private val trabajadorRepository: TrabajadorRepository) {

@@ -1,13 +1,15 @@
 package models.usuario
 
 import com.google.gson.GsonBuilder
+import models.Tarea
+import models.Turno
 import utils.Cifrador
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.NamedQueries
-import javax.persistence.NamedQuery
-import javax.persistence.Table
+import javax.persistence.*
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Table(name = "trabajadores")
 @NamedQueries(
@@ -22,7 +24,12 @@ class Trabajador(
     apellido: String,
     email: String,
     password: String,
-    perfil: Perfil = Perfil.ENCORDADOR
+    perfil: Perfil = Perfil.ENCORDADOR,
+
+    @OneToOne(fetch = FetchType.EAGER)
+    var turno: Turno? = null,
+    @OneToOne(fetch = FetchType.EAGER)
+    var tarea: Tarea? = null
 ) : Usuario(id, uuid, nombre, apellido, email, Cifrador.encryptString(password)) {
 
     override fun toString(): String {

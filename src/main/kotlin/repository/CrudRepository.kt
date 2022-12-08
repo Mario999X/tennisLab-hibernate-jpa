@@ -1,5 +1,8 @@
 package repository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 interface CrudRepository<T, ID> {
     fun findAll(): List<T>
     fun findById(id: ID): T?

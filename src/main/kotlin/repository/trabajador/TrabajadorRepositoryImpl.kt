@@ -8,6 +8,9 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 class TrabajadorRepositoryImpl : TrabajadorRepository {
     override fun findAll(): List<Trabajador> {
         log.debug { "findAll()" }

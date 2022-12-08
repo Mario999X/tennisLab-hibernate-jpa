@@ -5,6 +5,10 @@ import models.maquina.Encordadora
 import mu.KotlinLogging
 import javax.persistence.TypedQuery
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class EncordadoraRepositoryImpl : EncordadoraRepository {

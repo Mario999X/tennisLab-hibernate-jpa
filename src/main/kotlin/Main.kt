@@ -14,10 +14,15 @@ import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
 import repository.raqueta.RaquetaRepositoryImpl
+import repository.tarea.TareaRepositoryImpl
 import repository.trabajador.TrabajadorRepositoryImpl
 import repository.turno.TurnoRepositoryImpl
 
-fun main() {
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
+fun main(args: Array<String>) {
 
     initDataBase()
 
@@ -33,6 +38,7 @@ fun main() {
     val personalizadoraController = PersonalizadoraController(PersonalizadoraRepositoryImpl())
     val turnoController = TurnoController(TurnoRepositoryImpl())
     val raquetaController = RaquetaController(RaquetaRepositoryImpl())
+    val tareaController = TareaController(TareaRepositoryImpl())
 
     //Inserción de datos
     val productosInit = getProductosInit()
@@ -79,6 +85,10 @@ fun main() {
     val turnosInit = getTurnosInit()
     turnosInit.forEach { turno ->
         turnoController.createTurno(turno)
+    }
+    val tareasInit = getTareasInit()
+    tareasInit.forEach { tarea ->
+        tareaController.createTarea(tarea)
     }
 
     //CRUD
@@ -175,7 +185,7 @@ fun main() {
 
     //Raqueta
     //FindAll
-    var raqueta = raquetaController.getRaquetas()
+    val raqueta = raquetaController.getRaquetas()
     raqueta.forEach { System.err.println(it) }
 
     //Cliente
@@ -269,6 +279,25 @@ fun main() {
         turnoController.deleteTurno(it)
     }
     println(turnoController.getTurnos())
+
+    // TAREAS
+    // FindAll
+    val tareas = tareaController.getTareas()
+    println(tareas)
+    // FindById
+    val tarea = tareaController.getTareaById(tareas[0].id)
+    println(tarea)
+    // Update
+    tarea?.let {
+        it.trabajador = getTrabajadorInit()[2]
+        tareaController.updateTarea(it)
+    }
+    println(tareaController.getTareas())
+    // Delete
+    tarea?.let {
+        tareaController.deleteTarea(it)
+    }
+    println(tareaController.getTareas())
 
 }
 

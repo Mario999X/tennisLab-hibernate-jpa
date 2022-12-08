@@ -4,6 +4,10 @@ import models.Raqueta
 import mu.KotlinLogging
 import repository.raqueta.RaquetaRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class RaquetaController(private val raquetaRepository: RaquetaRepository) {

@@ -1,36 +1,38 @@
-package repository.turno
+package repository.tarea
 
 import database.HibernateManager
-import models.Turno
+import models.Tarea
 import mu.KotlinLogging
 import javax.persistence.TypedQuery
 
 /**
  * @author Sebastian Mendoza y Mario Resa
  */
+
 private val log = KotlinLogging.logger { }
 
-class TurnoRepositoryImpl : TurnoRepository{
-    override fun findAll(): List<Turno> {
+class TareaRepositoryImpl : TareaRepository {
+    override fun findAll(): List<Tarea> {
         log.debug { "findAll()" }
-        var turnos = mutableListOf<Turno>()
+        var tareas = mutableListOf<Tarea>()
         HibernateManager.query {
-            val query: TypedQuery<Turno> = HibernateManager.manager.createNamedQuery("Turno.findAll", Turno::class.java)
-            turnos = query.resultList
+            val query: TypedQuery<Tarea> =
+                HibernateManager.manager.createNamedQuery("Tarea.findAll", Tarea::class.java)
+            tareas = query.resultList
         }
-        return turnos
+        return tareas
     }
 
-    override fun findById(id: Long): Turno? {
+    override fun findById(id: Long): Tarea? {
         log.debug { "findById($id)" }
-        var turno: Turno? = null
+        var tarea: Tarea? = null
         HibernateManager.query {
-            turno = HibernateManager.manager.find(Turno::class.java, id)
+            tarea = HibernateManager.manager.find(Tarea::class.java, id)
         }
-        return turno
+        return tarea
     }
 
-    override fun save(entity: Turno): Turno {
+    override fun save(entity: Tarea): Tarea {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
             HibernateManager.manager.merge(entity)
@@ -38,12 +40,12 @@ class TurnoRepositoryImpl : TurnoRepository{
         return entity
     }
 
-    override fun delete(entity: Turno): Boolean {
+    override fun delete(entity: Tarea): Boolean {
         var result = false
         log.debug { "delete($entity)" }
         HibernateManager.transaction {
-            val turno = HibernateManager.manager.find(Turno::class.java, entity.id)
-            turno?.let {
+            val tarea = HibernateManager.manager.find(Tarea::class.java, entity.id)
+            tarea?.let {
                 HibernateManager.manager.remove(it)
                 result = true
             }

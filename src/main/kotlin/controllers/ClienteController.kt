@@ -4,6 +4,10 @@ import models.usuario.Cliente
 import mu.KotlinLogging
 import repository.cliente.ClienteRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
+
 private val log = KotlinLogging.logger { }
 
 class ClienteController(private val clienteRepository: ClienteRepository) {

@@ -4,6 +4,9 @@ import models.maquina.Encordadora
 import mu.KotlinLogging
 import repository.encordadora.EncordadoraRepository
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 
 private val log = KotlinLogging.logger { }
 

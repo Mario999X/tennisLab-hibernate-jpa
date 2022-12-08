@@ -8,6 +8,9 @@ import javax.persistence.NamedQueries
 import javax.persistence.NamedQuery
 import javax.persistence.Table
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Table(name = "encargados")
 @NamedQueries(
