@@ -1,5 +1,6 @@
 package controllers
 
+import exceptions.GenericException
 import models.Encordar
 import mu.KotlinLogging
 import repository.encordar.EncordarRepository
@@ -27,9 +28,9 @@ class EncordarController(private val encordarRepository: EncordarRepository) {
         return encordarRepository.findAll()
     }
 
-    fun getEncordadoById(id: Long): Encordar? {
+    fun getEncordadoById(id: Long): Encordar {
         log.debug { "Obteniendo encordado con id $id" }
-        return encordarRepository.findById(id)
+        return encordarRepository.findById(id) ?: throw GenericException("Encordado con id $id no encontrado")
     }
 
     fun updateEncordado(encordar: Encordar): Encordar {
@@ -39,6 +40,9 @@ class EncordarController(private val encordarRepository: EncordarRepository) {
 
     fun deleteEncordado(it: Encordar): Boolean {
         log.debug { "Borrando encordado $it" }
-        return encordarRepository.delete(it)
+        return if (encordarRepository.delete(it))
+            true
+        else
+            throw GenericException("Encordado con id ${it.id} no encontrado")
     }
 }

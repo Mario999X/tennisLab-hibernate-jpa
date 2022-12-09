@@ -113,17 +113,17 @@ fun main(args: Array<String>) {
     producto.forEach { println(it) }
     //FindById
     val productoId = productoController.getProductoById(producto[0].id)
-    productoId?.let { println(it) }
+    println(productoId)
     //Update
     val productoUpdate = productoController.getProductoById(producto[0].id)
-    productoUpdate?.let {
+    productoUpdate.let {
         it.stock += 3
         productoController.updateProducto(it)
     }
     println(productoUpdate)
     //Delete
     val productoDelete = productoController.getProductoById(producto[0].id)
-    productoDelete?.let { if (productoController.deleteProducto(it)) println("Producto eliminado") }
+    productoDelete.let { if (productoController.deleteProducto(it)) println("Producto eliminado") }
 
     //Adquisicion
     //FindAll
@@ -131,10 +131,10 @@ fun main(args: Array<String>) {
     adquisicion.forEach { println(it) }
     //FindById
     val adquisicionId = adquisicionController.getAdquisicionById(adquisicion[0].id)
-    adquisicionId?.let { println(it) }
+    println(adquisicionId)
     //Update
     val adquisicionUpdate = adquisicionController.getAdquisicionById(adquisicion[0].id)
-    adquisicionUpdate?.let {
+    adquisicionUpdate.let {
         it.cantidad += 1
         it.precio = it.precio?.times(it.cantidad)
         adquisicionController.updateAdquisicion(it)
@@ -142,7 +142,7 @@ fun main(args: Array<String>) {
     println(adquisicionUpdate)
     //Delete
     val adquisicionDelete = adquisicionController.getAdquisicionById(adquisicion[0].id)
-    adquisicionDelete?.let { if (adquisicionController.deleteAdquisicion(it)) println("Adquisicion eliminada") }
+    adquisicionDelete.let { if (adquisicionController.deleteAdquisicion(it)) println("Adquisicion eliminada") }
 
     //Encordar
     //FindAll
@@ -150,17 +150,17 @@ fun main(args: Array<String>) {
     encordar.forEach { println(it) }
     //FindById
     val encordadoId = encordarController.getEncordadoById(encordar[0].id)
-    encordadoId?.let { println(it) }
+    println(encordadoId)
     //Update
     val encordadoUpdate = encordarController.getEncordadoById(encordar[0].id)
-    encordadoUpdate?.let {
+    encordadoUpdate.let {
         it.nudos += 2
         encordarController.updateEncordado(it)
     }
     println(encordadoUpdate)
     //Delete
     val encordadoDelete = encordarController.getEncordadoById(encordar[0].id)
-    encordadoDelete?.let { if (encordarController.deleteEncordado(it)) println("Encordado eliminado") }
+    encordadoDelete.let { if (encordarController.deleteEncordado(it)) println("Encordado eliminado") }
 
     //Personalizar
     //FindAll
@@ -168,17 +168,17 @@ fun main(args: Array<String>) {
     personalizar.forEach { println(it) }
     //FindById
     val personalizarId = personalizarController.getPersonalizacionById(personalizar[0].id)
-    personalizarId?.let { println(it) }
+    println(personalizarId)
     //Update
     val personalizarUpdate = personalizarController.getPersonalizacionById(personalizar[0].id)
-    personalizarUpdate?.let {
+    personalizarUpdate.let {
         it.peso += 1
         personalizarController.updatePersonalizacion(personalizarUpdate)
     }
     println(personalizarUpdate)
     //Delete
     val personalizarDelete = personalizarController.getPersonalizacionById(personalizar[0].id)
-    personalizarDelete?.let { if (personalizarController.deletePersonalizacion(it)) println("Personalización eliminada") }
+    personalizarDelete.let { if (personalizarController.deletePersonalizacion(it)) println("Personalización eliminada") }
 
     //Encargado
     //FindAll
@@ -186,17 +186,17 @@ fun main(args: Array<String>) {
     encargado.forEach { println(it) }
     //FindById
     val encargadoId = encargadoController.getEncargadoById(encargado[0].id)
-    encargadoId?.let { println(it) }
+    println(encargadoId)
     //Update
     val encargadoUpdate = encargadoController.getEncargadoById(encargado[0].id)
-    encargadoUpdate?.let {
+    encargadoUpdate.let {
         it.nombre = "Ernesto"
         encargadoController.updateEncargado(it)
     }
     println(encargadoUpdate)
     //Delete
     val encargadoDelete = encargadoController.getEncargadoById(encargado[0].id)
-    encargadoDelete?.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
+    encargadoDelete.let { if (encargadoController.deleteEncargado(it)) println("Encargado eliminado") }
 
     //Cliente
     //FindAll
@@ -204,17 +204,17 @@ fun main(args: Array<String>) {
     cliente.forEach { println(it) }
     //FindById
     val clienteId = clienteController.getClienteById(cliente[0].id)
-    clienteId?.let { println(it) }
+    println(clienteId)
     //Update
     val clienteUpdate = clienteController.getClienteById(cliente[0].id)
-    clienteUpdate?.let {
+    clienteUpdate.let {
         it.apellido = "Acosta"
         clienteController.updateCliente(it)
     }
     println(clienteUpdate)
     //Delete
     val clienteDelete = clienteController.getClienteById(cliente[1].id)
-    clienteDelete?.let { if (clienteController.deleteCliente(it)) println("Cliente eliminado") }
+    clienteDelete.let { if (clienteController.deleteCliente(it)) println("Cliente eliminado") }
 
     //Pedido
     //FindAll
@@ -222,17 +222,17 @@ fun main(args: Array<String>) {
     pedidos.forEach { println(it) }
     //FindById
     val pedidoId = pedidoController.getPedidoById(pedidos[0].id)
-    pedidoId?.let { println(it) }
+    println(pedidoId)
     //Update
     val pedidoUpdate = pedidoController.getPedidoById(pedidos[0].id)
-    pedidoUpdate?.let {
+    pedidoUpdate.let {
         it.estado = Pedido.TipoEstado.PROCESANDO
         pedidoController.updatePedido(it)
     }
     println(pedidoUpdate)
     //Delete
     val pedidoDelete = pedidoController.getPedidoById(pedidos[1].id)
-    pedidoDelete?.let { if (pedidoController.deletePedido(it)) println("Pedido eliminado") }
+    pedidoDelete.let { if (pedidoController.deletePedido(it)) println("Pedido eliminado") }
 
     //Trabajador
     //FindAll
@@ -240,17 +240,17 @@ fun main(args: Array<String>) {
     trabajador.forEach { println(it) }
     //FindById
     val trabajadorId = trabajadorController.getTrabajadorById(trabajador[0].id)
-    trabajadorId?.let { println(it) }
+    println(trabajadorId)
     //Update
     val trabajadorUpdate = trabajadorController.getTrabajadorById(trabajador[0].id)
-    trabajadorUpdate?.let {
+    trabajadorUpdate.let {
         it.email = "emailCambiado@otroemail.com"
         trabajadorController.updateTrabajador(it)
     }
     println(trabajadorUpdate)
     //Delete
     val trabajadorDelete = trabajadorController.getTrabajadorById(trabajador[0].id)
-    trabajadorDelete?.let { if (trabajadorController.deleteTrabajador(it)) println("Trabajador eliminado") }
+    trabajadorDelete.let { if (trabajadorController.deleteTrabajador(it)) println("Trabajador eliminado") }
 
     // ENCORDADORAS
     // FindAll
@@ -260,13 +260,13 @@ fun main(args: Array<String>) {
     val encordadora = encordadoraController.getEncordadoraById(encordadoras[1].id)
     println(encordadora)
     // Update
-    encordadora?.let {
+    encordadora.let {
         it.isManual = false
         encordadoraController.updateEncordadora(it)
     }
     println(encordadoraController.getEncordadoras())
     // Delete
-    encordadora?.let {
+    encordadora.let {
         encordadoraController.deleteEncordadora(it)
     }
     println(encordadoraController.getEncordadoras())
@@ -278,13 +278,13 @@ fun main(args: Array<String>) {
     val personalizadora = personalizadoraController.getPersonalizadoraById(personalizadoras[1].id)
     println(personalizadoras)
     // Update
-    personalizadora?.let {
+    personalizadora.let {
         it.maniobrabilidad = false
         personalizadoraController.updatePersonalizadora(it)
     }
     println(personalizadoraController.getPersonalizadoras())
     // Delete
-    personalizadora?.let {
+    personalizadora.let {
         personalizadoraController.deletePersonalizadora(it)
     }
     println(personalizadoraController.getPersonalizadoras())
@@ -297,13 +297,13 @@ fun main(args: Array<String>) {
     val turno = turnoController.getTurnoById(turnos[0].id)
     println(turno)
     // Update
-    turno?.let {
+    turno.let {
         it.encordadora = null
         turnoController.updateTurno(it)
     }
     println(turnoController.getTurnos())
     // Delete
-    turno?.let {
+    turno.let {
         turnoController.deleteTurno(it)
     }
     println(turnoController.getTurnos())
@@ -316,13 +316,13 @@ fun main(args: Array<String>) {
     val tarea = tareaController.getTareaById(tareas[0].id)
     println(tarea)
     // Update
-    tarea?.let {
+    tarea.let {
         it.trabajador = getTrabajadorInit()[2]
         tareaController.updateTarea(it)
     }
     println(tareaController.getTareas())
     // Delete
-    tarea?.let {
+    tarea.let {
         tareaController.deleteTarea(it)
     }
     println(tareaController.getTareas())

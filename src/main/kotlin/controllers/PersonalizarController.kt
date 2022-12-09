@@ -1,5 +1,6 @@
 package controllers
 
+import exceptions.GenericException
 import models.Personalizar
 import mu.KotlinLogging
 import repository.personalizar.PersonalizarRepository
@@ -27,9 +28,9 @@ class PersonalizarController(private val personalizarRepository: PersonalizarRep
         return personalizarRepository.findAll()
     }
 
-    fun getPersonalizacionById(id: Long): Personalizar? {
+    fun getPersonalizacionById(id: Long): Personalizar {
         log.debug { "Obteniendo personalizacion con id $id" }
-        return personalizarRepository.findById(id)
+        return personalizarRepository.findById(id) ?: throw GenericException("Personalizado con id $id no encontrado")
     }
 
     fun updatePersonalizacion(personalizar: Personalizar): Personalizar {
@@ -39,6 +40,9 @@ class PersonalizarController(private val personalizarRepository: PersonalizarRep
 
     fun deletePersonalizacion(it: Personalizar): Boolean {
         log.debug { "Borrando personalizacion $it" }
-        return personalizarRepository.delete(it)
+        return if (personalizarRepository.delete(it))
+            true
+        else
+            throw GenericException("Personalizado con id ${it.id} no encontrado")
     }
 }
