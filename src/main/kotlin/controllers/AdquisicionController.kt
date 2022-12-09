@@ -1,5 +1,6 @@
 package controllers
 
+import exceptions.GenericException
 import models.Adquisicion
 import mu.KotlinLogging
 import repository.adquisicion.AdquisicionRepository
@@ -27,9 +28,9 @@ class AdquisicionController(private val adquisicionRepository: AdquisicionReposi
         return adquisicionRepository.findAll()
     }
 
-    fun getAdquisicionById(id: Long): Adquisicion? {
+    fun getAdquisicionById(id: Long): Adquisicion {
         log.debug { "Obteniendo adquisicion con id $id" }
-        return adquisicionRepository.findById(id)
+        return adquisicionRepository.findById(id) ?: throw GenericException("Adquisicion con id $id no encontrada")
     }
 
     fun updateAdquisicion(adquisicion: Adquisicion): Adquisicion {
@@ -39,6 +40,9 @@ class AdquisicionController(private val adquisicionRepository: AdquisicionReposi
 
     fun deleteAdquisicion(it: Adquisicion): Boolean {
         log.debug { "Borrando adquisicion $it" }
-        return adquisicionRepository.delete(it)
+        return if (adquisicionRepository.delete(it))
+            true
+        else
+            throw GenericException("Adquisicion con id ${it.id} no encontrada")
     }
 }

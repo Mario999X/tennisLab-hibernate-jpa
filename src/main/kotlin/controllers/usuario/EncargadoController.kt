@@ -1,5 +1,6 @@
 package controllers.usuario
 
+import exceptions.GenericException
 import models.usuario.Encargado
 import mu.KotlinLogging
 import repository.usuario.EncargadoRepository
@@ -27,9 +28,9 @@ class EncargadoController(private val encargadoRepository: EncargadoRepository) 
         return encargadoRepository.findAll()
     }
 
-    fun getEncargadoById(id: Long): Encargado? {
+    fun getEncargadoById(id: Long): Encargado {
         log.debug { "Obteniendo encargado con id $id" }
-        return encargadoRepository.findById(id)
+        return encargadoRepository.findById(id) ?: throw GenericException("Encargado con id $id no encontrado")
     }
 
     fun updateEncargado(encargado: Encargado): Encargado {
@@ -39,6 +40,9 @@ class EncargadoController(private val encargadoRepository: EncargadoRepository) 
 
     fun deleteEncargado(it: Encargado): Boolean {
         log.debug { "Borrando encargado $it" }
-        return encargadoRepository.delete(it)
+        return if (encargadoRepository.delete(it))
+            true
+        else
+            throw GenericException("Encargado con id ${it.id} no encontrado")
     }
 }

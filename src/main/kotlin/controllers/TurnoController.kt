@@ -1,5 +1,6 @@
 package controllers
 
+import exceptions.GenericException
 import models.Turno
 import mu.KotlinLogging
 import repository.turno.TurnoRepository
@@ -28,9 +29,9 @@ class TurnoController(private val turnoRepository: TurnoRepository) {
         return turnoRepository.findAll()
     }
 
-    fun getTurnoById(id: Long): Turno? {
+    fun getTurnoById(id: Long): Turno {
         log.debug { "Obteniendo turno con id $id" }
-        return turnoRepository.findById(id)
+        return turnoRepository.findById(id) ?: throw GenericException("Turno con id $id no encontrado")
     }
 
     fun updateTurno(turno: Turno): Turno {
@@ -40,6 +41,9 @@ class TurnoController(private val turnoRepository: TurnoRepository) {
 
     fun deleteTurno(it: Turno): Boolean {
         log.debug { "Borrando turno $it" }
-        return turnoRepository.delete(it)
+        return if (turnoRepository.delete(it))
+            true
+        else
+            throw GenericException("Turno con id ${it.id} no encontrado")
     }
 }

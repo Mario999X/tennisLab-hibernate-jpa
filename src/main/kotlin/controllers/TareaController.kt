@@ -1,5 +1,6 @@
 package controllers
 
+import exceptions.GenericException
 import models.Tarea
 import mu.KotlinLogging
 import repository.tarea.TareaRepository
@@ -28,9 +29,9 @@ class TareaController(private val tareaRepository: TareaRepository) {
         return tareaRepository.findAll()
     }
 
-    fun getTareaById(id: Long): Tarea? {
+    fun getTareaById(id: Long): Tarea {
         log.debug { "Obteniendo tarea con id $id" }
-        return tareaRepository.findById(id)
+        return tareaRepository.findById(id) ?: throw GenericException("Tarea con id $id no encontrada")
     }
 
     fun updateTarea(tarea: Tarea): Tarea {
@@ -40,6 +41,9 @@ class TareaController(private val tareaRepository: TareaRepository) {
 
     fun deleteTarea(it: Tarea): Boolean {
         log.debug { "Borrando $it" }
-        return tareaRepository.delete(it)
+        return if (tareaRepository.delete(it))
+            true
+        else
+            throw GenericException("Tarea con id ${it.id} no encontrado")
     }
 }

@@ -1,5 +1,6 @@
 package controllers
 
+import exceptions.GenericException
 import models.Producto
 import mu.KotlinLogging
 import repository.producto.ProductoRepository
@@ -27,9 +28,9 @@ class ProductoController(private val productoRepository: ProductoRepository) {
         return productoRepository.findAll()
     }
 
-    fun getProductoById(id: Long): Producto? {
+    fun getProductoById(id: Long): Producto {
         log.debug { "Obteniendo producto con id $id" }
-        return productoRepository.findById(id)
+        return productoRepository.findById(id) ?: throw GenericException("Producto con id $id no encontrado")
     }
 
     fun updateProducto(producto: Producto): Producto {
@@ -39,7 +40,10 @@ class ProductoController(private val productoRepository: ProductoRepository) {
 
     fun deleteProducto(it: Producto): Boolean {
         log.debug { "Borrando producto $it" }
-        return productoRepository.delete(it)
+        return if (productoRepository.delete(it))
+            true
+        else
+            throw GenericException("Producto con id ${it.id} no encontrado")
     }
 
 }

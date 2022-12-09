@@ -1,5 +1,6 @@
 package controllers.maquina
 
+import exceptions.GenericException
 import models.maquina.Personalizadora
 import mu.KotlinLogging
 import repository.personalizadora.PersonalizadoraRepository
@@ -28,9 +29,10 @@ class PersonalizadoraController(private val personalizadoraRepository: Personali
         return personalizadoraRepository.findAll()
     }
 
-    fun getPersonalizadoraById(id: Long): Personalizadora? {
+    fun getPersonalizadoraById(id: Long): Personalizadora {
         log.debug { "Obteniendo personalizadora con id $id" }
         return personalizadoraRepository.findById(id)
+            ?: throw GenericException("Personalizadora con id $id no encontrada")
     }
 
     fun updatePersonalizadora(personalizadora: Personalizadora): Personalizadora {
@@ -40,6 +42,9 @@ class PersonalizadoraController(private val personalizadoraRepository: Personali
 
     fun deletePersonalizadora(it: Personalizadora): Boolean {
         log.debug { "Borrando $it" }
-        return personalizadoraRepository.delete(it)
+        return if (personalizadoraRepository.delete(it))
+            true
+        else
+            throw GenericException("Personalizadora con id ${it.id} no encontrada")
     }
 }
