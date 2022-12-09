@@ -10,6 +10,11 @@ import repository.turno.TurnoRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * TurnoController, clase que usa los metodos del respectivo repositorio
+ *
+ * @property turnoRepository TurnoRepository
+ */
 class TurnoController(private val turnoRepository: TurnoRepository) {
 
     fun createTurno(turno: Turno): Turno {

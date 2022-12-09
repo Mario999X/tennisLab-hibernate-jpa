@@ -1,4 +1,4 @@
-package repository.cliente
+package repository.usuario
 
 import database.HibernateManager
 import database.HibernateManager.manager
@@ -12,7 +12,16 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * ClienteRepositoryImpl Clase que realiza operaciones CRUD, clientes.
+ *
+ */
 class ClienteRepositoryImpl : ClienteRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de clientes
+     */
     override fun findAll(): List<Cliente> {
         log.debug { "findAll()" }
         var clientes = mutableListOf<Cliente>()
@@ -23,6 +32,12 @@ class ClienteRepositoryImpl : ClienteRepository {
         return clientes
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de Cliente
+     * @return Cliente o Null
+     */
     override fun findById(id: Long): Cliente? {
         log.debug { "findById($id)" }
         var cliente: Cliente? = null
@@ -32,6 +47,12 @@ class ClienteRepositoryImpl : ClienteRepository {
         return cliente
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Cliente
+     * @return Cliente
+     */
     override fun save(entity: Cliente): Cliente {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -40,6 +61,12 @@ class ClienteRepositoryImpl : ClienteRepository {
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Cliente
+     * @return Boolean.
+     */
     override fun delete(entity: Cliente): Boolean {
         var result = false
         log.debug { "delete($entity)" }

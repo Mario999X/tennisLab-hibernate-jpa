@@ -2,7 +2,7 @@ package controllers.usuario
 
 import models.usuario.Cliente
 import mu.KotlinLogging
-import repository.cliente.ClienteRepository
+import repository.usuario.ClienteRepository
 
 /**
  * @author Sebastian Mendoza y Mario Resa
@@ -10,6 +10,11 @@ import repository.cliente.ClienteRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * ClienteController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property clienteRepository ClienteRepository
+ */
 class ClienteController(private val clienteRepository: ClienteRepository) {
     fun createCliente(cliente: Cliente): Cliente {
         log.debug { "Creando cliente $cliente" }

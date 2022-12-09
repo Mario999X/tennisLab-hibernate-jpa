@@ -1,4 +1,4 @@
-package repository.trabajador
+package repository.usuario
 
 import database.HibernateManager
 import database.HibernateManager.manager
@@ -6,12 +6,22 @@ import models.usuario.Trabajador
 import mu.KotlinLogging
 import javax.persistence.TypedQuery
 
-private val log = KotlinLogging.logger { }
-
 /**
  * @author Sebastian Mendoza y Mario Resa
  */
+private val log = KotlinLogging.logger { }
+
+
+/**
+ * TrabajadorRepositoryImpl, Clase que realiza operaciones CRUD, trabajador.
+ *
+ */
 class TrabajadorRepositoryImpl : TrabajadorRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de trabajadores
+     */
     override fun findAll(): List<Trabajador> {
         log.debug { "findAll()" }
         var trabajadores = mutableListOf<Trabajador>()
@@ -22,6 +32,12 @@ class TrabajadorRepositoryImpl : TrabajadorRepository {
         return trabajadores
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de trabajador
+     * @return Trabajador o Null
+     */
     override fun findById(id: Long): Trabajador? {
         log.debug { "findById($id)" }
         var trabajador: Trabajador? = null
@@ -31,6 +47,12 @@ class TrabajadorRepositoryImpl : TrabajadorRepository {
         return trabajador
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Trabajador
+     * @return Trabajador
+     */
     override fun save(entity: Trabajador): Trabajador {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -39,6 +61,12 @@ class TrabajadorRepositoryImpl : TrabajadorRepository {
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Trabajador
+     * @return Boolean
+     */
     override fun delete(entity: Trabajador): Boolean {
         var result = false
         log.debug { "delete($entity)" }

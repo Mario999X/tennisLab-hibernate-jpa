@@ -12,7 +12,16 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * ProductoRepositoryImpl Clase que realiza operaciones CRUD, productos.
+ *
+ */
 class ProductoRepositoryImpl : ProductoRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de productos
+     */
     override fun findAll(): List<Producto> {
         log.debug { "findAll()" }
         var productos = mutableListOf<Producto>()
@@ -23,6 +32,12 @@ class ProductoRepositoryImpl : ProductoRepository {
         return productos
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de producto
+     * @return Producto o Null
+     */
     override fun findById(id: Long): Producto? {
         log.debug { "findById($id)" }
         var producto: Producto? = null
@@ -32,6 +47,12 @@ class ProductoRepositoryImpl : ProductoRepository {
         return producto
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Producto
+     * @return Producto
+     */
     override fun save(entity: Producto): Producto {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -40,6 +61,12 @@ class ProductoRepositoryImpl : ProductoRepository {
         return entity
     }
 
+    /**
+     * Delete(), Se elimina el dato
+     *
+     * @param entity Producto
+     * @return Boolean
+     */
     override fun delete(entity: Producto): Boolean {
         var result = false
         log.debug { "delete($entity)" }

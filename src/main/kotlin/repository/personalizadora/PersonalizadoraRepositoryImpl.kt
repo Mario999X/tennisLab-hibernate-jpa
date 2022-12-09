@@ -11,8 +11,16 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
-
+/**
+ * PersonalizadoraRepositoryImpl, clase que realiza operaciones CRUD, personalizadora.
+ *
+ */
 class PersonalizadoraRepositoryImpl : PersonalizadoraRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de personalizadoras
+     */
     override fun findAll(): List<Personalizadora> {
         log.debug { "findAll()" }
         var personalizadoras = mutableListOf<Personalizadora>()
@@ -24,6 +32,12 @@ class PersonalizadoraRepositoryImpl : PersonalizadoraRepository {
         return personalizadoras
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de personalizadora
+     * @return Personalizadora o Null
+     */
     override fun findById(id: Long): Personalizadora? {
         log.debug { "findById($id)" }
         var personalizadora: Personalizadora? = null
@@ -33,6 +47,11 @@ class PersonalizadoraRepositoryImpl : PersonalizadoraRepository {
         return personalizadora
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Personalizadora
+     */
     override fun save(entity: Personalizadora): Personalizadora {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -41,6 +60,12 @@ class PersonalizadoraRepositoryImpl : PersonalizadoraRepository {
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Personalizadora
+     * @return Personalizadora
+     */
     override fun delete(entity: Personalizadora): Boolean {
         var result = false
         log.debug { "delete($entity)" }

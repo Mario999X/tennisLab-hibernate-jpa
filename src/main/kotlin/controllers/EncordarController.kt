@@ -10,6 +10,11 @@ import repository.encordar.EncordarRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * EncordarController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property encordarRepository EncordarRepository
+ */
 class EncordarController(private val encordarRepository: EncordarRepository) {
     fun createEncordado(encordar: Encordar): Encordar {
         log.debug { "Creando encordado $encordar" }

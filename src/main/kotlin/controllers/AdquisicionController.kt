@@ -10,6 +10,11 @@ import repository.adquisicion.AdquisicionRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * AdquisicionController, clase que usa los metodos del respetivo repositorio.
+ *
+ * @property adquisicionRepository AdquisicionRepository
+ */
 class AdquisicionController(private val adquisicionRepository: AdquisicionRepository) {
     fun createAdqusicion(adquisicion: Adquisicion): Adquisicion {
         log.info("Creando adquisicion $adquisicion")

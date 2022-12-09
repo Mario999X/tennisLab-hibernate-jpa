@@ -2,7 +2,7 @@ package controllers.usuario
 
 import models.usuario.Trabajador
 import mu.KotlinLogging
-import repository.trabajador.TrabajadorRepository
+import repository.usuario.TrabajadorRepository
 
 /**
  * @author Sebastian Mendoza y Mario Resa
@@ -10,6 +10,11 @@ import repository.trabajador.TrabajadorRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * TrabajadorController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property trabajadorRepository TrabajadorRepository
+ */
 class TrabajadorController(private val trabajadorRepository: TrabajadorRepository) {
     fun createTrabajador(trabajador: Trabajador): Trabajador {
         log.debug { "Creando trabajador $trabajador" }

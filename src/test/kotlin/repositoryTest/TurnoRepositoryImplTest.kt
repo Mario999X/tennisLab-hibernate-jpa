@@ -1,33 +1,43 @@
 package repositoryTest
 
 import database.HibernateManager
-import models.Producto
+import models.Turno
+import models.usuario.Trabajador
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.turno.TurnoRepositoryImpl
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class TurnoRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = TurnoRepositoryImpl()
 
-    private val data = Producto(
+    private val data2 = Trabajador(
+        id = 3L,
+        nombre = "Camila",
+        apellido = "Echeverri",
+        email = "email3@email.com",
+        password = "4321"
+    )
+
+    private val data = Turno(
         id = 5L,
-        tipo = Producto.Tipo.RAQUETA,
-        marca = "Babolat",
-        modelo = "Pure Aero",
-        stock = 3,
-        precio = 279.95
+        horario = Turno.TipoHorario.TEMPRANO,
+        trabajador = data2
     )
 
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM turnos")
             query.executeUpdate()
+        }
+
+        HibernateManager.transaction {
+            HibernateManager.manager.merge(data2)
         }
 
         HibernateManager.transaction {

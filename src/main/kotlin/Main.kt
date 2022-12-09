@@ -7,8 +7,8 @@ import controllers.usuario.TrabajadorController
 import database.*
 import models.Pedido
 import repository.adquisicion.AdquisicionRepositoryImpl
-import repository.cliente.ClienteRepositoryImpl
-import repository.encargado.EncargadoRepositoryImpl
+import repository.usuario.ClienteRepositoryImpl
+import repository.usuario.EncargadoRepositoryImpl
 import repository.encordadora.EncordadoraRepositoryImpl
 import repository.encordar.EncordarRepositoryImpl
 import repository.pedido.PedidoRepositoryImpl
@@ -16,13 +16,21 @@ import repository.personalizadora.PersonalizadoraRepositoryImpl
 import repository.personalizar.PersonalizarRepositoryImpl
 import repository.producto.ProductoRepositoryImpl
 import repository.tarea.TareaRepositoryImpl
-import repository.trabajador.TrabajadorRepositoryImpl
+import repository.usuario.TrabajadorRepositoryImpl
 import repository.turno.TurnoRepositoryImpl
 
 /**
  * @author Sebastian Mendoza y Mario Resa
  */
 
+/**
+ * Main() Funcion principal del programa
+ *
+ * En el se cargan los controllers de los componentes de la aplicacion, se introducen los datos de Data y se
+ * operan con ellos / Operaciones CRUD.
+ *
+ * @param args
+ */
 fun main(args: Array<String>) {
 
     initDataBase()
@@ -320,6 +328,10 @@ fun main(args: Array<String>) {
     println(tareaController.getTareas())
 }
 
+/**
+ * InitDataBase(), Funcion que se encarga de cargar la configuracion de la BBDD
+ *
+ */
 fun initDataBase() {
     HibernateManager.open()
     HibernateManager.close()

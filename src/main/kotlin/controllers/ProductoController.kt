@@ -10,6 +10,11 @@ import repository.producto.ProductoRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * ProductoController, clase que usa los metodos del respectivo repositorio
+ *
+ * @property productoRepository ProductoRepository
+ */
 class ProductoController(private val productoRepository: ProductoRepository) {
     fun createProducto(producto: Producto): Producto {
         log.debug { "Creando producto $producto" }

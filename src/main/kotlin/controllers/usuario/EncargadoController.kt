@@ -2,7 +2,7 @@ package controllers.usuario
 
 import models.usuario.Encargado
 import mu.KotlinLogging
-import repository.encargado.EncargadoRepository
+import repository.usuario.EncargadoRepository
 
 /**
  * @author Sebastian Mendoza y Mario Resa
@@ -10,6 +10,11 @@ import repository.encargado.EncargadoRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * EncargadoController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property encargadoRepository EncargadoRepository
+ */
 class EncargadoController(private val encargadoRepository: EncargadoRepository) {
     fun createEncargado(encargado: Encargado): Encargado {
         log.debug { "Creando encargado $encargado" }

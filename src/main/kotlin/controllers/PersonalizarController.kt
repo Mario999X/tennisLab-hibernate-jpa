@@ -10,6 +10,11 @@ import repository.personalizar.PersonalizarRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * PersonalizarController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property personalizarRepository PersonalizarRepository
+ */
 class PersonalizarController(private val personalizarRepository: PersonalizarRepository) {
     fun createPersonalizacion(personalizar: Personalizar): Personalizar {
         log.debug { "Creando personalizacion $personalizar" }
