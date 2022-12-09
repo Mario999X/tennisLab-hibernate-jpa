@@ -2,7 +2,7 @@ package controllers.usuario
 
 import models.usuario.Encargado
 import mu.KotlinLogging
-import repository.encargado.EncargadoRepository
+import repository.usuario.EncargadoRepository
 
 /**
  * @author Sebastian Mendoza y Mario Resa

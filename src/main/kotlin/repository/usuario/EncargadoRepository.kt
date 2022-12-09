@@ -1,4 +1,4 @@
-package repository.encargado
+package repository.usuario
 
 import models.usuario.Encargado
 import repository.CrudRepository

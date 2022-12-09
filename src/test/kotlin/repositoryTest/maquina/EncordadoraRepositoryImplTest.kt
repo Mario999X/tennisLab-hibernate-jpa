@@ -1,32 +1,35 @@
-package repositoryTest
+package repositoryTest.maquina
 
 import database.HibernateManager
-import models.Producto
+import models.maquina.Encordadora
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.encordadora.EncordadoraRepositoryImpl
+import java.time.LocalDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class EncordadoraRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = EncordadoraRepositoryImpl()
 
-    private val data = Producto(
+    private val data = Encordadora(
         id = 5L,
-        tipo = Producto.Tipo.RAQUETA,
-        marca = "Babolat",
-        modelo = "Pure Aero",
-        stock = 3,
-        precio = 279.95
+        marca = "Toshiba",
+        modelo = "ABC",
+        fechaAdquisicion = LocalDate.now().minusDays(10).toString(),
+        numSerie = 120L,
+        isManual = true,
+        tensionMax = 23.2,
+        tensionMin = 20.5
     )
 
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM encordadoras")
             query.executeUpdate()
         }
 

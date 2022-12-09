@@ -1,32 +1,30 @@
 package repositoryTest
 
 import database.HibernateManager
-import models.Producto
+import models.Personalizar
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.personalizar.PersonalizarRepositoryImpl
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class PersonalizarRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = PersonalizarRepositoryImpl()
 
-    private val data = Producto(
+    private val data = Personalizar(
         id = 5L,
-        tipo = Producto.Tipo.RAQUETA,
-        marca = "Babolat",
-        modelo = "Pure Aero",
-        stock = 3,
-        precio = 279.95
+        peso = 1.3,
+        balance = 1.4,
+        rigidez = 1
     )
 
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM personalizaciones")
             query.executeUpdate()
         }
 

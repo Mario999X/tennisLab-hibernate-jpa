@@ -1,32 +1,32 @@
 package repositoryTest
 
 import database.HibernateManager
-import models.Producto
+import models.Encordar
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.encordar.EncordarRepositoryImpl
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class EncordarRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = EncordarRepositoryImpl()
 
-    private val data = Producto(
+    private val data = Encordar(
         id = 5L,
-        tipo = Producto.Tipo.RAQUETA,
-        marca = "Babolat",
-        modelo = "Pure Aero",
-        stock = 3,
-        precio = 279.95
+        tensionCuerdasHorizontales = 2.2,
+        cordajeHorizontal = "Dato 1",
+        tensionCuerdasVerticales = 1.2,
+        cordajeVertical = "Dato 2",
+        nudos = 2
     )
 
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM encordados")
             query.executeUpdate()
         }
 

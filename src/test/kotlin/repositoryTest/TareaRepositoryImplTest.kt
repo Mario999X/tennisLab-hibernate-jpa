@@ -1,33 +1,56 @@
 package repositoryTest
 
-import database.HibernateManager
-import models.Producto
+import database.*
+import models.Personalizar
+import models.Tarea
+import models.usuario.Trabajador
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.tarea.TareaRepositoryImpl
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class TareaRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = TareaRepositoryImpl()
 
-    private val data = Producto(
+    private val data2 = Personalizar(
         id = 5L,
-        tipo = Producto.Tipo.RAQUETA,
-        marca = "Babolat",
-        modelo = "Pure Aero",
-        stock = 3,
-        precio = 279.95
+        peso = 1.3,
+        balance = 1.4,
+        rigidez = 1
+    )
+
+    private val data3 = Trabajador(
+        id = 5L,
+        nombre = "Camila",
+        apellido = "Echeverri",
+        email = "email3@email.com",
+        password = "4321"
+    )
+
+    private val data = Tarea(
+        id = 5L,
+        personalizar = data2,
+        precio = data2.precio,
+        trabajador = data3
     )
 
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM tareas")
             query.executeUpdate()
+        }
+
+        HibernateManager.transaction {
+            HibernateManager.manager.merge(data2)
+        }
+
+        HibernateManager.transaction {
+            HibernateManager.manager.merge(data3)
         }
 
         HibernateManager.transaction {

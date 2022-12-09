@@ -1,20 +1,21 @@
 package repositoryTest
 
 import database.HibernateManager
+import models.Adquisicion
 import models.Producto
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.adquisicion.AdquisicionRepositoryImpl
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class AdquisicionRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = AdquisicionRepositoryImpl()
 
-    private val data = Producto(
+    private val data2 = Producto(
         id = 5L,
         tipo = Producto.Tipo.RAQUETA,
         marca = "Babolat",
@@ -23,11 +24,21 @@ internal class ProductoRepositoryImplTest {
         precio = 279.95
     )
 
+    private val data = Adquisicion(
+        id = 5L,
+        cantidad = 2,
+        producto = data2
+    )
+
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM adquisiciones")
             query.executeUpdate()
+        }
+
+        HibernateManager.transaction {
+            HibernateManager.manager.merge(data2)
         }
 
         HibernateManager.transaction {

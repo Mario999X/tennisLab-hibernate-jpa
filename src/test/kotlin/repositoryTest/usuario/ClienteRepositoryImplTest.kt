@@ -1,32 +1,32 @@
-package repositoryTest
+package repositoryTest.usuario
 
 import database.HibernateManager
-import models.Producto
+import models.usuario.Cliente
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
-import repository.producto.ProductoRepositoryImpl
+import repository.usuario.ClienteRepositoryImpl
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ProductoRepositoryImplTest {
+internal class ClienteRepositoryImplTest {
 
-    private val repository = ProductoRepositoryImpl()
+    private val repository = ClienteRepositoryImpl()
 
-    private val data = Producto(
+    private val data = Cliente(
         id = 5L,
-        tipo = Producto.Tipo.RAQUETA,
-        marca = "Babolat",
-        modelo = "Pure Aero",
-        stock = 3,
-        precio = 279.95
+        nombre = "Sebastian",
+        apellido = "Mendoza",
+        email = "email@email.com",
+        password = "1234"
     )
+
 
     @BeforeEach
     fun setUp() {
         HibernateManager.transaction {
-            val query = HibernateManager.manager.createNativeQuery("DELETE FROM productos")
+            val query = HibernateManager.manager.createNativeQuery("DELETE FROM clientes")
             query.executeUpdate()
         }
 

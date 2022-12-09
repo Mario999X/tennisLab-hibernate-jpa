@@ -2,7 +2,7 @@ package controllers.usuario
 
 import models.usuario.Cliente
 import mu.KotlinLogging
-import repository.cliente.ClienteRepository
+import repository.usuario.ClienteRepository
 
 /**
  * @author Sebastian Mendoza y Mario Resa

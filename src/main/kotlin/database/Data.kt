@@ -273,6 +273,7 @@ fun getTareasInit() = listOf(
         adquisicion = getAdquisicionInit()[1],
         personalizar = getPersonalizacionInit()[1],
         encordar = getEncordadosInit()[1],
+        precio = getEncordadosInit()[1].precio + getAdquisicionInit()[1].precio!! + getEncordadosInit()[1].precio,
         trabajador = getTrabajadorInit()[1]
     )
 )

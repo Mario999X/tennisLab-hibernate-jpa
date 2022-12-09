@@ -1,4 +1,4 @@
-package repository.encargado
+package repository.usuario
 
 import database.HibernateManager
 import database.HibernateManager.manager

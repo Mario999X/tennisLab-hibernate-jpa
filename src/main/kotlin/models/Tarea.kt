@@ -34,8 +34,8 @@ data class Tarea(
     @OneToOne(fetch = FetchType.EAGER)
     @Expose val encordar: Encordar? = null,
 
-    // TODO revisar el tema precio y PEDIDO
-    @Expose var precio: Double? = adquisicion?.precio?.plus(personalizar!!.precio)?.plus(encordar!!.precio),
+    // TODO revisar el tema precio
+    @Expose var precio: Double = 0.0,
 
 
     @JoinColumn(name = "trabajador_id")

@@ -1,4 +1,4 @@
-package repository.trabajador
+package repository.usuario
 
 import models.usuario.Trabajador
 import repository.CrudRepository

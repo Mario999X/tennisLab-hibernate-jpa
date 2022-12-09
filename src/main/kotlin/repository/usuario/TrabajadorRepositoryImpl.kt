@@ -1,4 +1,4 @@
-package repository.trabajador
+package repository.usuario
 
 import database.HibernateManager
 import database.HibernateManager.manager
