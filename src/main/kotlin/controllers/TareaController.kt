@@ -10,6 +10,11 @@ import repository.tarea.TareaRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * TareaController, clase que usa los metodos del respectivo repositorio
+ *
+ * @property tareaRepository TareaRepository
+ */
 class TareaController(private val tareaRepository: TareaRepository) {
 
     fun createTarea(tarea: Tarea): Tarea {

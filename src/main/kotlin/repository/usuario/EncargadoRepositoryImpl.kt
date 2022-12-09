@@ -12,7 +12,16 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * EncargadoRepositoryImpl Clase que realiza operaciones CRUD, encargados.
+ *
+ */
 class EncargadoRepositoryImpl : EncargadoRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de encargados
+     */
     override fun findAll(): List<Encargado> {
         log.debug { "findAll()" }
         var encargados = mutableListOf<Encargado>()
@@ -23,6 +32,12 @@ class EncargadoRepositoryImpl : EncargadoRepository {
         return encargados
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de encargado
+     * @return Encargado o Null
+     */
     override fun findById(id: Long): Encargado? {
         log.debug { "findById($id)" }
         var encargado: Encargado? = null
@@ -32,6 +47,12 @@ class EncargadoRepositoryImpl : EncargadoRepository {
         return encargado
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Encargado
+     * @return Encargado
+     */
     override fun save(entity: Encargado): Encargado {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -40,6 +61,12 @@ class EncargadoRepositoryImpl : EncargadoRepository {
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Encargado
+     * @return Boolean
+     */
     override fun delete(entity: Encargado): Boolean {
         var result = false
         log.debug { "delete($entity)" }

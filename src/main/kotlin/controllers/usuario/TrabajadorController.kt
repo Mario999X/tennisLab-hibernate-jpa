@@ -10,6 +10,11 @@ import repository.usuario.TrabajadorRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * TrabajadorController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property trabajadorRepository TrabajadorRepository
+ */
 class TrabajadorController(private val trabajadorRepository: TrabajadorRepository) {
     fun createTrabajador(trabajador: Trabajador): Trabajador {
         log.debug { "Creando trabajador $trabajador" }

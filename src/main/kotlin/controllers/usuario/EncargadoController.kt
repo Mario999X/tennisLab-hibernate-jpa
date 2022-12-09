@@ -10,6 +10,11 @@ import repository.usuario.EncargadoRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * EncargadoController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property encargadoRepository EncargadoRepository
+ */
 class EncargadoController(private val encargadoRepository: EncargadoRepository) {
     fun createEncargado(encargado: Encargado): Encargado {
         log.debug { "Creando encargado $encargado" }

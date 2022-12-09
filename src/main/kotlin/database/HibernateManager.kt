@@ -8,6 +8,10 @@ import javax.persistence.EntityTransaction
 import javax.persistence.Persistence
 
 private val log = KotlinLogging.logger {  }
+
+/**
+ * HibernateManager, clase objeto que maneja la BBDD
+ */
 object HibernateManager : Closeable {
     private var entityManagerFactory = Persistence.createEntityManagerFactory("default")
     lateinit var manager: EntityManager

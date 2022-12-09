@@ -11,7 +11,16 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * EncordadoraRepositoryImpl, Clase que realiza operaciones CRUD, encordadoras.
+ *
+ */
 class EncordadoraRepositoryImpl : EncordadoraRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de encordadoras
+     */
     override fun findAll(): List<Encordadora> {
         log.debug { "findAll()" }
         var encordadoras = mutableListOf<Encordadora>()
@@ -22,6 +31,12 @@ class EncordadoraRepositoryImpl : EncordadoraRepository {
         return encordadoras
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de encordadora
+     * @return Encordadora o Null
+     */
     override fun findById(id: Long): Encordadora? {
         log.debug { "findById($id)" }
         var encordadora: Encordadora? = null
@@ -31,6 +46,11 @@ class EncordadoraRepositoryImpl : EncordadoraRepository {
         return encordadora
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Encordadora
+     */
     override fun save(entity: Encordadora): Encordadora {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -39,6 +59,12 @@ class EncordadoraRepositoryImpl : EncordadoraRepository {
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Encordadora
+     * @return Boolean
+     */
     override fun delete(entity: Encordadora): Boolean {
         var result = false
         log.debug { "delete($entity)" }

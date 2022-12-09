@@ -6,6 +6,11 @@ import repository.pedido.PedidoRepository
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * PedidoController, clase que usa los metodos del respectivo repositorio.
+ *
+ * @property pedidoRepository PedidoRepository
+ */
 class PedidoController(private val pedidoRepository: PedidoRepository) {
     fun createPedido(pedido: Pedido): Pedido {
         log.debug { "Creando pedido $pedido" }

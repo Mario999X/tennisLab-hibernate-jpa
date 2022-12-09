@@ -10,7 +10,16 @@ import javax.persistence.TypedQuery
  */
 private val log = KotlinLogging.logger { }
 
+/**
+ * TurnoRepositoryImpl, Clase que realiza operaciones CRUD, turnos.
+ *
+ */
 class TurnoRepositoryImpl : TurnoRepository{
+    /**
+     * FindAll()
+     *
+     * @return Lista de turnos
+     */
     override fun findAll(): List<Turno> {
         log.debug { "findAll()" }
         var turnos = mutableListOf<Turno>()
@@ -21,6 +30,12 @@ class TurnoRepositoryImpl : TurnoRepository{
         return turnos
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de turno
+     * @return Turno o Null
+     */
     override fun findById(id: Long): Turno? {
         log.debug { "findById($id)" }
         var turno: Turno? = null
@@ -30,6 +45,11 @@ class TurnoRepositoryImpl : TurnoRepository{
         return turno
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Turno
+     */
     override fun save(entity: Turno): Turno {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -38,6 +58,12 @@ class TurnoRepositoryImpl : TurnoRepository{
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Turno
+     * @return Boolean
+     */
     override fun delete(entity: Turno): Boolean {
         var result = false
         log.debug { "delete($entity)" }

@@ -8,7 +8,16 @@ import javax.persistence.TypedQuery
 
 private val log = KotlinLogging.logger { }
 
+/**
+ * PedidoRepositoryImpl, Clase que realiza operaciones CRUD, pedidos.
+ *
+ */
 class PedidoRepositoryImpl : PedidoRepository {
+    /**
+     * FindAll()
+     *
+     * @return Lista de pedidos
+     */
     override fun findAll(): List<Pedido> {
         log.debug { "findAll()" }
         var pedidos = mutableListOf<Pedido>()
@@ -19,6 +28,12 @@ class PedidoRepositoryImpl : PedidoRepository {
         return pedidos
     }
 
+    /**
+     * FindById()
+     *
+     * @param id Identificador de pedido
+     * @return Pedido o Null
+     */
     override fun findById(id: Long): Pedido? {
         log.debug { "findById($id)" }
         var pedido: Pedido? = null
@@ -28,6 +43,12 @@ class PedidoRepositoryImpl : PedidoRepository {
         return pedido
     }
 
+    /**
+     * Save(), guarda o actualiza el entity
+     *
+     * @param entity Pedido
+     * @return Pedido
+     */
     override fun save(entity: Pedido): Pedido {
         log.debug { "save($entity)" }
         HibernateManager.transaction {
@@ -36,6 +57,12 @@ class PedidoRepositoryImpl : PedidoRepository {
         return entity
     }
 
+    /**
+     * Delete(), se elimina el dato
+     *
+     * @param entity Pedido
+     * @return Boolean
+     */
     override fun delete(entity: Pedido): Boolean {
         var result = false
         log.debug { "delete($entity)" }
