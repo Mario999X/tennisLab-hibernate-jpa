@@ -3,10 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.20'
     id 'org.jetbrains.kotlin.plugin.allopen' version '1.6.20'
     id 'org.jetbrains.kotlin.plugin.noarg' version '1.6.20'
+    id("org.jetbrains.dokka") version "1.7.20"
 }
 
 group 'es.mendozaresa'
-version '1.0-SNAPSHOT'
+version '1'
 
 repositories {
     mavenCentral()
@@ -54,6 +55,18 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    //Dokka Documentación Kotlin
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.7.20")
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                'Main-Class': "MainKt"
+        )
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 test {

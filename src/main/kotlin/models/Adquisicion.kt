@@ -1,9 +1,13 @@
 package models
 
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.Expose
 import java.util.*
 import javax.persistence.*
 
+/**
+ * @author Sebastian Mendoza y Mario Resa
+ */
 @Entity
 @Table(name = "adquisiciones")
 @NamedQueries(
@@ -14,15 +18,19 @@ import javax.persistence.*
 data class Adquisicion(
     @Id
     val id: Long,
-    val uuid: UUID = UUID.randomUUID(),
-    var cantidad: Int,
+    @Expose val uuid: UUID = UUID.randomUUID(),
+    @Expose var cantidad: Int,
+
     @OneToOne(cascade = [CascadeType.ALL], orphanRemoval = true)
     @JoinColumn(name = "producto_id")
-    var producto: Producto? = null,
-    var precio: Double? = producto?.precio?.times(cantidad)
+    @Expose var producto: Producto? = null,
+    @Expose var precio: Double? = producto?.precio?.times(cantidad),
+
+    @OneToOne(fetch = FetchType.EAGER)
+    var tarea: Tarea? = null
 ) {
     override fun toString(): String {
-        return GsonBuilder().setPrettyPrinting()
+        return GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create().toJson(this)
     }
 }
